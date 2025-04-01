@@ -346,6 +346,7 @@ namespace Selenium_Learning
             dr.Navigate().GoToUrl("https://www.amazon.in/");
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             dr.Manage().Window.Maximize();
+            Thread.Sleep(8000);
             //dr.FindElement(By.XPath("//span[text()='Hello, sign in']")).Click(); //signin
             //dr.FindElement(By.XPath("//input[@name='email']")).Click();
             //dr.FindElement(By.XPath("//input[@name='email']")).SendKeys("maharshibadiganti@gmail.com"); //id
@@ -367,31 +368,31 @@ namespace Selenium_Learning
             dr.FindElement(By.XPath("//span[text()='Sony 139 cm (55 inches) BRAVIA 2 4K Ultra HD Smart LED Google TV K-55S25B (Black)']")).Click();
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-            System.Collections.ObjectModel.ReadOnlyCollection<string> listHandles = dr.WindowHandles;
+           // System.Collections.ObjectModel.ReadOnlyCollection<string> listHandles = dr.WindowHandles;
             var windowHandles = dr.WindowHandles;             // Handles switch Window
             dr.SwitchTo().Window(windowHandles[1]);
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             dr.FindElement(By.XPath("(//input[@name='submit.add-to-cart'])[2]")).Click();  //add to cart
-           // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-           // //proced shows with login
-           // dr.FindElement(By.XPath("//input[@aria-labelledby='attach-sidesheet-view-cart-button-announce']")).Click();
-           // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-           // dr.FindElement(By.Name("proceedToRetailCheckout")).Click();
-           // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-           // dr.FindElement(By.XPath("(//input[@type='radio'])[4]")).Click();
-           // dr.FindElement(By.Name("__sif_encryptedVPA_collect")).Click();
-           // dr.FindElement(By.Name("__sif_encryptedVPA_collect")).SendKeys("8897251375@ybl");
-           // dr.FindElement(By.Name("ppw-widgetEvent:ValidateUpiIdEvent")).Click();  //verify
-           // Thread.Sleep(3000);
-           // dr.FindElement(By.XPath("//input[@aria-labelledby='checkout-secondary-continue-button-id-announce']")).Click(); // use this payment
-           // Thread.Sleep(7000);
-           // //ChromeOptions blok = new ChromeOptions();
-           // //blok.AddArgument("");
-           // //dr.FindElement(By.XPath("//a[@id='prime-interstitial-nothanks-button']")).Click();
-           // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-           //// dr.FindElement(By.Name("placeYourOrder1")).Click();  //pay now
+            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            //proced shows with login
+            dr.FindElement(By.XPath("//input[@aria-labelledby='attach-sidesheet-view-cart-button-announce']")).Click();
+            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            dr.FindElement(By.Name("proceedToRetailCheckout")).Click();
+            // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            // dr.FindElement(By.XPath("(//input[@type='radio'])[4]")).Click();
+            // dr.FindElement(By.Name("__sif_encryptedVPA_collect")).Click();
+            // dr.FindElement(By.Name("__sif_encryptedVPA_collect")).SendKeys("8897251375@ybl");
+            // dr.FindElement(By.Name("ppw-widgetEvent:ValidateUpiIdEvent")).Click();  //verify
+            // Thread.Sleep(3000);
+            // dr.FindElement(By.XPath("//input[@aria-labelledby='checkout-secondary-continue-button-id-announce']")).Click(); // use this payment
+            // Thread.Sleep(7000);
+            // //ChromeOptions blok = new ChromeOptions();
+            // //blok.AddArgument("");
+            // //dr.FindElement(By.XPath("//a[@id='prime-interstitial-nothanks-button']")).Click();
+            // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            //// dr.FindElement(By.Name("placeYourOrder1")).Click();  //pay now
 
-           // Thread.Sleep(3000);
+            // Thread.Sleep(3000);
             dr.Quit();
 
         }
@@ -579,6 +580,25 @@ namespace Selenium_Learning
             dr.Close();
         }
         [Test]
+        public void Hovertoelement()
+        {
+            IWebDriver dr = new ChromeDriver();
+            dr.Navigate().GoToUrl("https://rahulshettyacademy.com/AutomationPractice/");
+
+            dr.Manage().Window.Maximize();
+            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+            Actions act = new Actions(dr);
+            IWebElement ele = dr.FindElement(By.XPath("//button[text()='Mouse Hover']"));
+            act.MoveToElement(ele).Perform();
+            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            
+            IWebElement elet = dr.FindElement(By.XPath("//a[text()='Reload']"));
+            //string stitle = elet.GetAttribute("title");
+            Assert.True(elet.Displayed, "mouse is not hovered");
+            dr.Close(); 
+        }
+            [Test]
         public void Alertsverify()
         {
             IWebDriver dr = new ChromeDriver();

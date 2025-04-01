@@ -19,6 +19,7 @@ using NUnit.Framework;
 using static System.Net.Mime.MediaTypeNames;
 using System.Data;
 using System.Net.NetworkInformation;
+using Microsoft.Office.Interop.Excel;
 
 //using ExcelDataReader;
 //using Microsoft.Office.Interop.Excel;
@@ -729,6 +730,50 @@ namespace Selenium_Learning
         //    }
         //    return rank;
         //}
+        [Test]
+        public void FixedheaderWebTable()
+        {
+            string name = "Ben";
+            bool found = false; 
+            IWebDriver dr = new ChromeDriver();
+            dr.Navigate().GoToUrl("https://rahulshettyacademy.com/AutomationPractice/"); 
+            dr.Manage().Window.Maximize();
+            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+            IWebElement table = dr.FindElement(By.XPath("(//table[@id='product'])[2]"));
+            IList<IWebElement> rows = table.FindElements(By.TagName("tr"));
+           // Console.WriteLine("Number of rows: " + rows.Count);
+            
+
+            for (int i = 0; i < rows.Count; i++)
+            {
+                IList<IWebElement> cells = rows[i].FindElements(By.TagName("td"));
+                //Console.WriteLine("Number of cells: " + cells.Count);
+                for (int j = 0; j < cells.Count; j++)
+                {
+                    string names = cells[0].Text;
+                    string positions = cells[1].Text;
+                    if (names.Equals(name));
+                    {
+                        Console.WriteLine($"Name :{names},  Position :{positions}");
+                        found= true;    
+                         break;
+                    }
+                   // Console.WriteLine($"Name :{names},  Position :{positions}");
+                   if(!found)
+                   {
+                        Console.WriteLine($"{names} not found in table");
+                        break;
+                   }
+                }
+
+               
+            }
+            
+
+            dr.Quit();
+
+        }
 
         //[Test]
         //public void SearchText()

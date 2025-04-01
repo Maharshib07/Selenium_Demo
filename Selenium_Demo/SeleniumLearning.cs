@@ -813,18 +813,10 @@ namespace Selenium_Learning
             //IWebElement chevsBan =  dr.FindElement(By.XPath("//div[@class='cb-bg-white cb-col-100 cb-col cb-hm-rght']//following::div[@class='cb-col-100 cb-col cb-series-matches ng-scope']"));
             //Console.WriteLine(chevsBan.Text, "Shedules not found");  
             var ele = dr.FindElement(By.XPath("//html//body//div[@class='cb-col-100 cb-col cb-series-matches ng-scope']"));
-           var element = 
+           
             Console.WriteLine(ele);
-            if (int i = 0; ele. <=1; i++)
-            {
-
-                foreach (var element in ele)
-                {
-                    Console.WriteLine(element.Text, "\n");
-                    Console.WriteLine("----------------");
-
-                }
-            }
+            
+            
         }
         [Test]
         public void ErrorHandling()

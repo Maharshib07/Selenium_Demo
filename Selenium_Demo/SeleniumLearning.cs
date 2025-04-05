@@ -1017,7 +1017,7 @@ namespace Selenium_Learning
             byte[] img = Convert.FromBase64String(ss.AsBase64EncodedString);
 
             System.IO.File.WriteAllBytes(path, img);
-            //            //ss = ((ITakesScreenshot)dr).GetScreenshot();
+            ss = ((ITakesScreenshot)dr).GetScreenshot();
             //ss.SaveAsFile(path);
             Console.WriteLine($"Screenshot saved to: {path}");
             

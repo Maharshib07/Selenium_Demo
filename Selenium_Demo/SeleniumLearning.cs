@@ -7,6 +7,7 @@ using OpenQA.Selenium.Edge;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using OpenQA.Selenium.Support.UI;
 using System.Security.Cryptography.X509Certificates;
 using System.Drawing;
@@ -20,6 +21,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Data;
 using System.Net.NetworkInformation;
 using Microsoft.Office.Interop.Excel;
+using Actions = OpenQA.Selenium.Interactions.Actions;
 
 //using ExcelDataReader;
 //using Microsoft.Office.Interop.Excel;
@@ -348,37 +350,40 @@ namespace Selenium_Learning
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             dr.Manage().Window.Maximize();
             Thread.Sleep(8000);
-            //dr.FindElement(By.XPath("//span[text()='Hello, sign in']")).Click(); //signin
+            dr.FindElement(By.XPath("//span[text()='Hello, sign in']")).Click(); //signin
             //dr.FindElement(By.XPath("//input[@name='email']")).Click();
-            //dr.FindElement(By.XPath("//input[@name='email']")).SendKeys("maharshibadiganti@gmail.com"); //id
-            //dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            //dr.FindElement(By.XPath("//input[@class='a-button-input']")).Click();
-            //dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            dr.FindElement(By.XPath("//input[@name='email']")).SendKeys("maharshibadiganti@gmail.com"); //id
+            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            dr.FindElement(By.XPath("//input[@class='a-button-input']")).Click();
+            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             //dr.FindElement(By.XPath("//input[@id='ap_password']")).Click(); //password
-            //dr.FindElement(By.Name("password")).SendKeys("Maharshi08@#");      //input[@id='signInSubmit']
-            //dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            //dr.FindElement(By.XPath("//input[@id='signInSubmit']")).Click();
-            //Thread.Sleep(10000);
+            dr.FindElement(By.Name("password")).SendKeys("Maharshi08@#");      //input[@id='signInSubmit']
+            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            dr.FindElement(By.XPath("//input[@id='signInSubmit']")).Click();
+            IWebElement ValidPassword = dr.FindElement(By.XPath("//span[text()='Hello, Maharshi']"));
+            string stitle = ValidPassword.Text;
+            Assert.IsTrue(stitle == "Hello, Maharshi", "Invalid Username or Password");
+            Thread.Sleep(10000);
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
 
-            dr.FindElement(By.XPath("//input[@id='twotabsearchtextbox']")).Click();
-            dr.FindElement(By.XPath("//input[@id='twotabsearchtextbox']")).SendKeys("sony bravia 55 inch"); //search tv
-            dr.FindElement(By.XPath("//input[@id='twotabsearchtextbox']")).SendKeys(Keys.Enter);
-            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            dr.FindElement(By.XPath("//span[text()='Sony 139 cm (55 inches) BRAVIA 2 4K Ultra HD Smart LED Google TV K-55S25B (Black)']")).Click();
-            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+           // dr.FindElement(By.XPath("//input[@id='twotabsearchtextbox']")).Click();
+           // dr.FindElement(By.XPath("//input[@id='twotabsearchtextbox']")).SendKeys("sony bravia 55 inch"); //search tv
+           // dr.FindElement(By.XPath("//input[@id='twotabsearchtextbox']")).SendKeys(Keys.Enter);
+           // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+           // dr.FindElement(By.XPath("//span[text()='Sony 139 cm (55 inches) BRAVIA 2 4K Ultra HD Smart LED Google TV K-55S25B (Black)']")).Click();
+           // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-           // System.Collections.ObjectModel.ReadOnlyCollection<string> listHandles = dr.WindowHandles;
-            var windowHandles = dr.WindowHandles;             // Handles switch Window
-            dr.SwitchTo().Window(windowHandles[1]);
-            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            dr.FindElement(By.XPath("(//input[@name='submit.add-to-cart'])[2]")).Click();  //add to cart
-            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            //proced shows with login
-            dr.FindElement(By.XPath("//input[@aria-labelledby='attach-sidesheet-view-cart-button-announce']")).Click();
-            dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            dr.FindElement(By.Name("proceedToRetailCheckout")).Click();
+           //// System.Collections.ObjectModel.ReadOnlyCollection<string> listHandles = dr.WindowHandles;
+           // var windowHandles = dr.WindowHandles;             // Handles switch Window
+           // dr.SwitchTo().Window(windowHandles[1]);
+           // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+           // dr.FindElement(By.XPath("(//input[@name='submit.add-to-cart'])[2]")).Click();  //add to cart
+           // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+           // //proced shows with login
+           // dr.FindElement(By.XPath("//input[@aria-labelledby='attach-sidesheet-view-cart-button-announce']")).Click();
+           // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+           // dr.FindElement(By.Name("proceedToRetailCheckout")).Click();
             // dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             // dr.FindElement(By.XPath("(//input[@type='radio'])[4]")).Click();
             // dr.FindElement(By.Name("__sif_encryptedVPA_collect")).Click();
@@ -748,12 +753,12 @@ namespace Selenium_Learning
             for (int i = 0; i < rows.Count; i++)
             {
                 IList<IWebElement> cells = rows[i].FindElements(By.TagName("td"));
-                //Console.WriteLine("Number of cells: " + cells.Count);
+                Console.WriteLine("Number of cells: " + cells.Count);
                 for (int j = 0; j < cells.Count; j++)
                 {
                     string names = cells[0].Text;
                     string positions = cells[1].Text;
-                    if (names.Equals(name));
+                    if (names.Equals(name))
                     {
                         Console.WriteLine($"Name :{names},  Position :{positions}");
                         found= true;    

@@ -58,6 +58,7 @@ namespace Selenium_Learning
             Assert.IsTrue(txtSrch2.GetAttribute("value") == "India", "Search keyword not matching");
             Assert.IsTrue(txtSrch2.GetAttribute("maxlength") == "2048", "maxlength not matching");
             Console.WriteLine(txtSrch2.GetAttribute("name"));
+            Console.WriteLine(txtSrch2.GetAttribute("type"));
         }
         [Test]
         public void InteractWithCheckBoxAndRadio()

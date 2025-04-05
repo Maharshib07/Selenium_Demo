@@ -58,6 +58,7 @@ namespace Selenium_Learning
             Assert.IsTrue(txtSrch2.GetAttribute("value") == "India", "Search keyword not matching");
             Assert.IsTrue(txtSrch2.GetAttribute("maxlength") == "2048", "maxlength not matching");
             Console.WriteLine(txtSrch2.GetAttribute("name"));
+            Console.WriteLine(txtSrch2.GetAttribute("type"));
         }
         [Test]
         public void InteractWithCheckBoxAndRadio()
@@ -990,6 +991,7 @@ namespace Selenium_Learning
             dr.Manage().Cookies.AddCookie(co3);
 
             dr.Manage().Cookies.DeleteCookieNamed("course");
+            //dr.Manage().Cookies.DeleteCookie(co1);
             //dr.Manage().Cookies.DeleteAllCookies();
 
             ICookieJar listCookies = dr.Manage().Cookies;

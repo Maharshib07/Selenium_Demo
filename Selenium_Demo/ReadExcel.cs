@@ -26,7 +26,7 @@ namespace Selenium_Demo
         }
 
         [Test]
-        public void TestGoogleSearchFromExcel()
+        public void TestdataFromExcel()
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Required for EPPlus 5+
 
@@ -91,7 +91,7 @@ namespace Selenium_Demo
         }
 
         [Test]
-        public void TestGoogleSearchFromExcell()
+        public void DataFromExcell()
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Required for EPPlus 5+
 

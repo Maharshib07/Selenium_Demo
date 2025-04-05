@@ -991,6 +991,7 @@ namespace Selenium_Learning
             dr.Manage().Cookies.AddCookie(co3);
 
             dr.Manage().Cookies.DeleteCookieNamed("course");
+            //dr.Manage().Cookies.DeleteCookie(co1);
             //dr.Manage().Cookies.DeleteAllCookies();
 
             ICookieJar listCookies = dr.Manage().Cookies;

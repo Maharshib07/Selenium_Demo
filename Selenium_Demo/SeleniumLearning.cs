@@ -22,6 +22,7 @@ using System.Data;
 using System.Net.NetworkInformation;
 using Microsoft.Office.Interop.Excel;
 using Actions = OpenQA.Selenium.Interactions.Actions;
+using System.Runtime.Intrinsics.X86;
 
 //using ExcelDataReader;
 //using Microsoft.Office.Interop.Excel;
@@ -281,11 +282,11 @@ namespace Selenium_Learning
             Console.WriteLine("options count is:" + optcount);
 
             element.SelectByText("Proof.");
-            for (int i = 0; i < optcount; i++)  //Select by LOOP
-            {
-                element.SelectByIndex(3);
+            //for (int i = 0; i < optcount; i++)  //Select by LOOP
+            //{
+            //    element.SelectByIndex(3);
 
-            }
+            //}
             Thread.Sleep(2000);
             dr.Quit();
         }
@@ -566,6 +567,24 @@ namespace Selenium_Learning
             //Assert.IsTrue(actualURL.Contains(""), "Not reached to Grocery store page");
             //dr.Close(); //((//img[@title='Flipkart'])[1])//.. (//img[@title='Flipkart'])[1] Flipkart
         }
+
+        [Test]
+        public void SendKeysJSExecutor()
+        {
+            IWebDriver dr = new ChromeDriver();
+            dr.Navigate().GoToUrl("https://www.flipkart.com/");
+            dr.Manage().Window.Maximize();
+            
+            IWebElement ele = dr.FindElement(By.XPath("//input[@name='q']"));
+            IJavaScriptExecutor js = (IJavaScriptExecutor)dr;
+            js.ExecuteScript("arguments[0].value='Motorola Edge 50';", ele);   
+            
+
+            string stitle = ele.GetAttribute("value");
+            Assert.IsTrue(stitle == "Motorola Edge 50", "Text not entered");
+            dr.Close();
+        }
+
         [Test]
         public void Movetoelement()
         {
@@ -618,7 +637,7 @@ namespace Selenium_Learning
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
             IWebElement ele = dr.FindElement(By.XPath("//button[@id='confirmButton']"));
-            act.ScrollToElement(ele).Click().Build().Perform();
+            act.MoveToElement(ele).Click().Build().Perform();
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
             IAlert alrt = dr.SwitchTo().Alert();  // Alert   
@@ -662,9 +681,10 @@ namespace Selenium_Learning
             {
                 alrt.Accept();
             }
-            
-
-        }
+            else
+            {
+                alrt.Dismiss();
+            }
     }
     public class WebTable
     {
@@ -902,7 +922,7 @@ namespace Selenium_Learning
                 dr.Manage().Window.Maximize();
                 dr.FindElement(By.XPath("//span[text()='IPL 2025']")).Click();
                 Thread.Sleep(2000);
-                IWebElement element= dr.FindElement(By.XPath("(//a[@class='cb-nav-tab'])[4]"));   //4e
+                IWebElement element= dr.FindElement(By.XPath("(//a[@class='cb-nav-tab'])[10]"));   //4e
                 Console.WriteLine("Element Found: " + element.Text);
                 element.Click();
                 IWebElement el = dr.FindElement(By.XPath("//div[text()='Chennai Super Kings']"));
@@ -923,9 +943,10 @@ namespace Selenium_Learning
                         string path = "C:\\ScreenshotsSelenium\\testimg.png";
                         //Screenshot screenshot = driver.GetScreenshot();
                         byte[] img = Convert.FromBase64String(ss.AsBase64EncodedString);
+                        var date = DateTime.Now;
 
                         System.IO.File.WriteAllBytes(path, img);
-                        Console.WriteLine($"Screenshot saved to: {path}");
+                        Console.WriteLine($"Screenshot saved to: {path}\t{date}");
                     }
                     catch (Exception ex)
                     {
@@ -934,8 +955,7 @@ namespace Selenium_Learning
                 }
             }
             finally
-            {
-                Thread.Sleep(1000);
+            { }
                 dr.Quit();
             }
         }
@@ -1001,6 +1021,7 @@ namespace Selenium_Learning
             {
                 Console.WriteLine(allacookies[i].ToString());
             }
+            
 
             //dr.Manage().Cookies.DeleteCookieNamed("username");
 
@@ -1011,15 +1032,17 @@ namespace Selenium_Learning
             dr.Navigate().GoToUrl("https://www.guru99.com/selenium-tutorial.html");
 
             Screenshot ss = ((ITakesScreenshot)dr).GetScreenshot();
-            
-            string path = ("C:\\ScreenshotsSelenium\\testimages.png");
+
+            string date = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            string path = "C:\\ScreenshotsSelenium\\"+"SS" + date.ToString() + ".png";
             //Screenshot screenshot = driver.GetScreenshot();
             byte[] img = Convert.FromBase64String(ss.AsBase64EncodedString);
 
             System.IO.File.WriteAllBytes(path, img);
             ss = ((ITakesScreenshot)dr).GetScreenshot();
+            
             //ss.SaveAsFile(path);
-            Console.WriteLine($"Screenshot saved to: {path}");
+            Console.WriteLine($"Screenshot saved to: {path}\t +{date}");
             
         }
     }

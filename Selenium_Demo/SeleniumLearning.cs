@@ -702,8 +702,6 @@ namespace Selenium_Learning
             IWebElement trd = dr.FindElement(By.XPath("((//td[@class='Topfilter_web_greentext__KELHh'])//..//child::td)[1]"));
             Console.WriteLine("Third company :" + trd.Text);
             dr.Close();
-
-
         }
         [Test]
         public void CompaniesNamebyRank()
@@ -1030,7 +1028,7 @@ namespace Selenium_Learning
         public void ScreenShotVerify()
         {
             dr.Navigate().GoToUrl("https://www.guru99.com/selenium-tutorial.html");
-
+           
             Screenshot ss = ((ITakesScreenshot)dr).GetScreenshot();
 
             string date = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");

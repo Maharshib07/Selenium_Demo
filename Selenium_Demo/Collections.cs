@@ -24,6 +24,9 @@ namespace CsharpCollections
             Students.Add("Rajesh");
             Students.Add("Ramesh");
             Students.Add("Rahul");
+            Students.Add(null);
+            Students.Add("Rishi");
+            
 
             foreach (string student in Students)
             {
@@ -46,7 +49,7 @@ namespace CsharpCollections
             {
                 Console.Write(Nms[i] + "  ");
             }
-            Console.Write(Nms.Capacity);
+            //Console.Write(Nms.Capacity);
         }
         [Test]
         public void HashCollection()
@@ -80,10 +83,11 @@ namespace CsharpCollections
             {
                 Console.WriteLine(dist);
             }
-            dist.Remove(2); // To Remove  key
+            Dist.Remove(2); // To Remove  key;
 
             foreach (var dict in Dist)
             {
+                
                 Console.WriteLine(value: $"{dict.Key} {dict.Value}");
             }
         }
@@ -131,7 +135,7 @@ namespace CsharpCollections
 
             foreach (DictionaryEntry dict in Books)
             {
-                Console.WriteLine(value: $"{dict.Key} {dict.Value}");
+                Console.WriteLine(value: $"{dict.Key}, {dict.Value}");
             }
 
         }
@@ -154,7 +158,7 @@ namespace CsharpCollections
 
             foreach (var dict in Books)
             {
-                Console.WriteLine(value: $"{dict.Key} {dict.Value}");
+                Console.WriteLine(value: $"{dict.Key}, {dict.Value}");
             }
         }
 
@@ -192,10 +196,39 @@ namespace CsharpCollections
             LetterCounter counter = new LetterCounter();
             counter.Dictpractice();
         }
+
+        
+        public void NameCount(string Name)
+        {
+            
+            Dictionary<char, int> LetterCount = new Dictionary<char, int>();
+
+            foreach(var letter in Name.ToLower())
+            {
+                if (char.IsLetter(letter))
+                {
+                    if (LetterCount.ContainsKey(letter))
+                    {
+                        LetterCount[letter]++;
+                    }
+                    else
+                    {
+                        LetterCount[letter] = 1;
+                    }
+                }
+
+            }
+            foreach(var item in LetterCount)
+            {
+                Console.WriteLine($"Letter : {item.Key}, Count : {item.Value}");
+            }
+        }
+        [Test]
+        public void Letter()
+        {
+            LetterCounter nam = new LetterCounter();
+            nam.NameCount("B.M.MahA12rshi");
+
+        }
     }
 }
-
-    
-    
-
-

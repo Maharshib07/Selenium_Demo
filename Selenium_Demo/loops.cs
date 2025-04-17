@@ -36,7 +36,7 @@ namespace CsharpLoops
                     Console.WriteLine("Kicking :" + bikes[i]);
                     continue;
                 }
-                Console.WriteLine(bikes[i]);
+               // Console.WriteLine(bikes[i]);
             }
         }
         [Test]
@@ -98,9 +98,6 @@ namespace CsharpLoops
             {
                 Methodrrecall roy = new Methodrrecall();
                 int result = roy.Ray("anand");
-
-                
-
             }
 
         }
@@ -139,6 +136,35 @@ namespace CsharpLoops
                 if (num % i == 0) return false; // Divisible, so not prime
             }
 
+            return true;
+        }
+        [Test]
+        public void PrimeTime()
+        {
+            
+            List<int> PrimeNumbers = new List<int>();
+            for (int i = 0;i <= 100;i++)
+            {
+                if(IsPrime(i))
+                {
+                    PrimeNumbers.Add(i);
+                }
+            }
+            foreach(int prime in PrimeNumbers)
+            {
+                Console.Write(prime+", ");
+            }
+        }
+       
+        static bool PrimeNum(int i)
+        {
+            if (i <= 1) return false;
+            if (i == 2) return true;
+
+            for (i=0; i<Math.Sqrt(i);i++)
+            {
+                if (i % i == 0) return false;
+            }
             return true;
         }
     }

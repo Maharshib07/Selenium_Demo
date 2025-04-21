@@ -23,6 +23,7 @@ using System.Net.NetworkInformation;
 using Microsoft.Office.Interop.Excel;
 using Actions = OpenQA.Selenium.Interactions.Actions;
 using System.Runtime.Intrinsics.X86;
+using OpenQA.Selenium.Internal;
 
 //using ExcelDataReader;
 //using Microsoft.Office.Interop.Excel;
@@ -60,6 +61,7 @@ namespace Selenium_Learning
             Assert.IsTrue(txtSrch2.GetAttribute("maxlength") == "2048", "maxlength not matching");
             Console.WriteLine(txtSrch2.GetAttribute("name"));
             Console.WriteLine(txtSrch2.GetAttribute("type"));
+            
         }
         [Test]
         public void InteractWithCheckBoxAndRadio()
@@ -297,6 +299,7 @@ namespace Selenium_Learning
             dr.Navigate().GoToUrl("https://www.tutorialspoint.com/selenium/practice/select-menu.php");
             dr.Manage().Window.Maximize();
             Thread.Sleep(2000);
+            
 
 
 
@@ -483,6 +486,7 @@ namespace Selenium_Learning
             Thread.Sleep(3000);
             dr.Close();
         }
+        [Test]
         public void Normalclikverify()
         {
             IWebDriver dr = new ChromeDriver();
@@ -640,7 +644,7 @@ namespace Selenium_Learning
             act.MoveToElement(ele).Click().Build().Perform();
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-            IAlert alrt = dr.SwitchTo().Alert();  // Alert   
+            IAlert alrt = dr.SwitchTo().Alert();  // Alert
             String alrtMsg = dr.SwitchTo().Alert().Text; // reading alert	
             Console.WriteLine(alrtMsg); //display alert
 

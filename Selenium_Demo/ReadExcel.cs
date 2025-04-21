@@ -3,7 +3,8 @@ using System.IO;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OfficeOpenXml; // EPPlus for Excel handling
+using OfficeOpenXml;
+using System.Globalization; // EPPlus for Excel handling
 
 namespace Selenium_Demo
 {
@@ -11,7 +12,6 @@ namespace Selenium_Demo
     {
         private IWebDriver driver;
         private string excelFilePath = @"C:\Users\Lenovo\Documents\Xpath_techtutorialz.xlsx";
-
 
         [SetUp]
         public void Setup()
@@ -125,6 +125,73 @@ namespace Selenium_Demo
             Thread.Sleep(2000);
             driver.Quit(); // Close browser
             driver.Dispose();
+        }
+    }
+   
+    public class SentenceSplit
+    {
+        [Test]
+        public void BreakingSentence()
+        {
+            string sentence = " Hi my name  a is  Maharshi  ";
+
+           // string Trim = sentence.Trim();
+            string sen = sentence.ToLower();
+            Console.WriteLine(sen);
+
+            string[] Split = sen.Split(" ");
+
+            foreach (var split in Split)
+            {
+                if (split.Length > 0)
+                { 
+                    string capital = char.ToUpper(split[0])+ split.Substring(1) + " ";
+                    Console.Write(capital);
+                }
+            }
+        }
+    }
+    public class Program
+    {
+        [Test]
+        public void Words()
+        {
+            string input = "Hi!  my name is Maharshi";
+
+            // Use TextInfo to capitalize each word
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+            string result = textInfo.ToTitleCase(input.ToLower());
+
+            Console.WriteLine(result);
+        }
+        [Test]
+        public void Word2()
+        {
+            string input = "Hi! my name is Maharshi";
+            string rang = input.ToLower();
+            string[] words = rang.Split(' ');
+            
+            string result = "";
+
+            foreach (string word in words)
+            {
+                if (word.Length > 0)
+                {
+                    // Capitalize first character, keep rest as is
+                    string capitalized = char.ToUpper(word[0])+ word.Substring(1);
+                    result += capitalized + " ";
+                }
+                //else
+                //{
+                //    // Preserve multiple spaces
+                //    result += " ";
+                //}
+            }
+
+            // Trim any extra space at the end
+            result = result.TrimEnd();
+
+            Console.WriteLine(result);
         }
     }
 }

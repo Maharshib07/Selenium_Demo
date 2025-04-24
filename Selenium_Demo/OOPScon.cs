@@ -19,7 +19,7 @@ namespace CsharpOOps
     // Pig "implements" the IAnimal interface
     public class InterfPig : IAnimal
     {
-        [Test]
+        
         public void animalSound()
         {
             // The body of animalSound() is provided here
@@ -74,7 +74,7 @@ namespace CsharpOOps
     }
     public class AbsCow : Ani
     {
-        [Test]
+        
         public override void anison()
         {
             Console.WriteLine("Aa..");
@@ -101,7 +101,7 @@ namespace CsharpOOps
             return x + y;
         }
         
-        public int Add(int x, int y, int z)
+        public int Ad(int x, int y, int z)
         {
             return x + y + z;
         }
@@ -149,7 +149,7 @@ namespace CsharpOOps
         }
         public override double Are()
         {
-            return 7 ^ 2; // ht*width
+            return 7 ^ 2; // 
         }
     }
     public class overrideSum

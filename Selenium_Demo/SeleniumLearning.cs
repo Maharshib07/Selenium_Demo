@@ -722,7 +722,7 @@ namespace Selenium_Learning
             Thread.Sleep(4000);
 
             IWebElement Companynamewill = dr.FindElement(By.XPath("(//table[@class='Topfilter_web_tbl_indices__Wa1Sj undefined'])//tbody//tr[" + rank + "]//td[1]"));
-            return Companynamewill.Text;
+            return Companynamewill.Text; 
 
         }
         //[Test]

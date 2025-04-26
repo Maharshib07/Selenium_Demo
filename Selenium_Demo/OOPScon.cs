@@ -8,6 +8,7 @@ using System.Runtime.ConstrainedExecution;
 using NUnit.Framework;
 using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json.Linq;
+using OpenQA.Selenium.DevTools.V131.Browser;
 
 namespace CsharpOOps
 {
@@ -162,5 +163,33 @@ namespace CsharpOOps
             Areas sq = new Sq();
             Console.WriteLine("Area :" + sq.Are());
         }  
+    }
+    class PhoneNum
+    {
+        private long phnNO = 23456789;
+        public long PNo
+        {
+            get { return phnNO; }
+            set
+            {
+                if (value > 1000000000 && value < 9999999999)
+                { phnNO = value; }
+                else
+                {
+                    Console.WriteLine("Invalid PHNo.. Enter Correct Phone Number\n Default Num Is :");
+                }
+            }
+        }
+    }
+    class Encapsculation
+    {
+        [Test]
+        public static void Number()
+        {
+            PhoneNum Num = new PhoneNum();
+            Num.PNo = 6575159896;
+            Console.WriteLine(Num.PNo);
+           
+        }
     }
 }

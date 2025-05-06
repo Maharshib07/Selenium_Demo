@@ -770,35 +770,31 @@ namespace Selenium_Learning
 
             IWebElement table = dr.FindElement(By.XPath("(//table[@id='product'])[2]"));
             IList<IWebElement> rows = table.FindElements(By.TagName("tr"));
-           // Console.WriteLine("Number of rows: " + rows.Count);
-            
+                // Console.WriteLine("Number of rows: " + rows.Count);
 
-            for (int i = 0; i < rows.Count; i++)
-            {
-                IList<IWebElement> cells = rows[i].FindElements(By.TagName("td"));
-                Console.WriteLine("Number of cells: " + cells.Count);
-                for (int j = 0; j < cells.Count; j++)
+
+                for (int i = 0; i < rows.Count; i++)
                 {
-                    string names = cells[0].Text;
-                    string positions = cells[1].Text;
-                    if (names.Equals(name))
+                    IList<IWebElement> cells = rows[i].FindElements(By.TagName("td"));
+                    Console.WriteLine("Number of cells: " + cells.Count);
+                    for (int j = 0; j < cells.Count; j++)
                     {
-                        Console.WriteLine($"Name :{names},  Position :{positions}");
-                        found= true;    
-                         break;
+                        string names = cells[0].Text;
+                        string positions = cells[1].Text;
+                        if (names.Equals(name))
+                        {
+                            Console.WriteLine($"Name :{names},  Position :{positions}");
+                            found = true;
+                            break;
+                        }
+                        // Console.WriteLine($"Name :{names},  Position :{positions}");
+                        if (!found)
+                        {
+                            Console.WriteLine($"{names} not found in table");
+                            break;
+                        }
                     }
-                   // Console.WriteLine($"Name :{names},  Position :{positions}");
-                   if(!found)
-                   {
-                        Console.WriteLine($"{names} not found in table");
-                        break;
-                   }
                 }
-
-               
-            }
-            
-
             dr.Quit();
 
         }
@@ -1046,6 +1042,15 @@ namespace Selenium_Learning
             //ss.SaveAsFile(path);
             Console.WriteLine($"Screenshot saved to: {path}\t +{date}");
             
+        }
+        [Test]
+        public void screenShOOt()
+        {
+            dr.Navigate().GoToUrl("https://www.flipkart.com");
+            ITakesScreenshot Screensht = (ITakesScreenshot)dr;
+            Screenshot SS = Screensht.GetScreenshot();
+            SS.SaveAsFile("C:\\ScreenshotsSelenium\\ss.png");
+
         }
     }
 }

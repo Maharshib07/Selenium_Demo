@@ -4,7 +4,8 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OfficeOpenXml;
-using System.Globalization; // EPPlus for Excel handling
+using System.Globalization;
+using NUnit.Framework.Interfaces; // EPPlus for Excel handling
 
 namespace Selenium_Demo
 {
@@ -136,7 +137,7 @@ namespace Selenium_Demo
         {
             string sentence = " Hi my name  a is  Maharshi  ";
 
-           // string Trim = sentence.Trim();
+            // string Trim = sentence.Trim();
             string sen = sentence.ToLower();
             Console.WriteLine(sen);
 
@@ -156,8 +157,8 @@ namespace Selenium_Demo
                 for (int i = 0; i < spy.Length; i++)
                 {
                     if (i % 2 != 0)
-                    { output =(" "+char.ToUpper(spy[i]) + spy.Substring(1));}
-                   // else { output =(char.ToLower(spy[i]) + spy.Substring(1) + " ");}
+                    { output = (" " + char.ToUpper(spy[i]) + spy.Substring(1)); }
+                    // else { output =(char.ToLower(spy[i]) + spy.Substring(1) + " ");}
 
                     Console.WriteLine(output);
                 }
@@ -183,7 +184,7 @@ namespace Selenium_Demo
             string input = "Hi! my name is Maharshi";
             string rang = input.ToLower();
             string[] words = rang.Split(' ');
-            
+
             string result = "";
 
             foreach (string word in words)
@@ -191,7 +192,7 @@ namespace Selenium_Demo
                 if (word.Length > 0)
                 {
                     // Capitalize first character, keep rest as is
-                    string capitalized = char.ToUpper(word[0])+ word.Substring(1);
+                    string capitalized = char.ToUpper(word[0]) + word.Substring(1);
                     result += capitalized + " ";
                 }
                 //else
@@ -205,12 +206,12 @@ namespace Selenium_Demo
 
             Console.WriteLine(result);
         }
-       
-        
+
+
     }
     public class ExcelReaders
     {
-       
+
         public static List<string[]> ReadExcel(string filePath)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -226,7 +227,7 @@ namespace Selenium_Demo
                 for (int row = 2; row <= rowCount; row++) // assuming first row is header
                 {
                     string[] rowData = new string[colCount];
-                    for(int col = 1; col <= colCount; col++)
+                    for (int col = 1; col <= colCount; col++)
                     {
                         rowData[col - 1] = worksheet.Cells[row, col].Text;
                     }
@@ -244,12 +245,61 @@ namespace Selenium_Demo
         {
             string path = @"C:\Users\Lenovo\OneDrive\Documents\Xpath_techtutorialz.xlsx";
             List<string[]> excelData = ExcelReaders.ReadExcel(path);
+            //string datafromexcel = excelData[1][2];
 
             foreach (var row in excelData)
             {
-                TestContext.WriteLine($"Data: {string.Join(" | ", row)}");
+                TestContext.WriteLine($"Data : {string.Join(" | ", row)}");
             }
         }
     }
 
+
+
+    public class ExcelReaderss
+
+    {
+        public static List<string[]> ReadExcel(string filePath, int rowLimit, int colLimit)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            var data = new List<string[]>();
+
+            FileInfo fileInfo = new FileInfo(filePath);
+            using (var package = new ExcelPackage(fileInfo))
+            {
+                var worksheet = package.Workbook.Worksheets[0];
+                int rowCount = Math.Min(worksheet.Dimension.Rows, rowLimit);
+                int colCount = Math.Min(worksheet.Dimension.Columns, colLimit);
+
+                for (int row = 2; row <= rowCount; row++) // assuming first row is header
+                {
+                    string[] rowData = new string[colCount];
+                    for (int col = 1; col <= colCount; col++)
+                    {
+                        rowData[col - 1] = worksheet.Cells[row, col].Text;
+                    }
+                    data.Add(rowData);
+                }
+            }
+
+            return data;
+        }
+
+    }
+    public class ExcelDataTests
+    {
+        [Test]
+        public void ReadExcelData()
+        {
+            string path = @"C:\Users\Lenovo\OneDrive\Documents\Xpath_techtutorialz.xlsx";
+            int rowLimit = 4;
+            int colLimit = 1;
+            List<string[]> excelData = ExcelReaderss.ReadExcel(path, rowLimit, colLimit);
+
+            foreach (var row in excelData)
+            {
+                Console.WriteLine($"   : {string.Join(" | ", row)}");
+            }
+        }
+    }
 }

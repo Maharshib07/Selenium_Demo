@@ -81,11 +81,7 @@ namespace Selenium_Demo
         [SetUp]
         public void Setup()
         {
-            // Ensure the Excel file exists
             Assert.IsTrue(File.Exists(excelFilePath), "Excel file does not exist: " + excelFilePath);
-           // driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-
-            // Initialize ChromeDriver
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
         }
@@ -93,28 +89,32 @@ namespace Selenium_Demo
         [Test]
         public void DataFromExcell()
         {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Required for EPPlus 5+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             var fileInfo = new FileInfo(excelFilePath);
 
             using (var package = new ExcelPackage(fileInfo))
             {
-                var worksheet = package.Workbook.Worksheets[0]; // Get first worksheet
-                var rowCount = worksheet.Dimension?.Rows ?? 0; // Safe null handling
-                Console.WriteLine("test case\n");
+                var worksheet = package.Workbook.Worksheets[0];
+                var rowCount = worksheet.Dimension?.Rows ?? 0;
 
-                Assert.Greater(rowCount,3, "Excel file should have at least one data row.");
-                Thread.Sleep(1000);
-                for (int row =2; row <= rowCount; row++) // Assuming first row is headers
+                Console.WriteLine("Reading test data from Excel:\n");
+                Assert.Greater(rowCount, 1, "Excel file should have at least one data row.");
+
+                for (int row = 2; row <= rowCount; row++)
                 {
-                    Thread.Sleep(1000);
-                    var searchQuery1 = worksheet.Cells[row, 1].Text; // Read search term from column 1
-                    var searchQuery2 = worksheet.Cells[row, 2].Text;
-                    var searchQuery3 = worksheet.Cells[row, 3].Text;// Read search term from column 3
-                    var searchQuery4 = worksheet.Cells[row, 4].Text;
-                   // Assert.IsNotEmpty(searchQuery1, searchQuery2, searchQuery3, searchQuery4,$"Search term in row {row} is empty!");
+                    var searchQuery1 = worksheet.Cells[row, 1].Text.Trim();
+                    var searchQuery2 = worksheet.Cells[row, 2].Text.Trim();
+                    var searchQuery3 = worksheet.Cells[row, 3].Text.Trim();
+                    var searchQuery4 = worksheet.Cells[row, 4].Text.Trim();
 
-                    Console.WriteLine($"list:{searchQuery1}\n|action:{searchQuery2}\n|expected:{searchQuery3}\n|actual:{searchQuery4}\n  \n");
+                    if (!string.IsNullOrEmpty(searchQuery1) ||
+                        !string.IsNullOrEmpty(searchQuery2) ||
+                        !string.IsNullOrEmpty(searchQuery3) ||
+                        !string.IsNullOrEmpty(searchQuery4))
+                    {
+                        Console.WriteLine($"List: {searchQuery1} | Action: {searchQuery2} | Expected: {searchQuery3} | Actual: {searchQuery4}");
+                    }
                 }
             }
         }
@@ -123,11 +123,12 @@ namespace Selenium_Demo
         public void TearDownn()
         {
             Thread.Sleep(2000);
-            driver.Quit(); // Close browser
+            driver.Quit();
             driver.Dispose();
         }
     }
-   
+
+
     public class SentenceSplit
     {
         [Test]
@@ -144,9 +145,21 @@ namespace Selenium_Demo
             foreach (var split in Split)
             {
                 if (split.Length > 0)
-                { 
-                    string capital = char.ToUpper(split[0])+ split.Substring(1) + " ";
+                {
+                    string capital = char.ToUpper(split[0]) + split.Substring(1) + " ";
                     Console.Write(capital);
+                }
+            }
+            foreach (var spy in Split)
+            {
+                string output = " ";
+                for (int i = 0; i < spy.Length; i++)
+                {
+                    if (i % 2 != 0)
+                    { output =(" "+char.ToUpper(spy[i]) + spy.Substring(1));}
+                   // else { output =(char.ToLower(spy[i]) + spy.Substring(1) + " ");}
+
+                    Console.WriteLine(output);
                 }
             }
         }
@@ -187,11 +200,56 @@ namespace Selenium_Demo
                 //    result += " ";
                 //}
             }
-
             // Trim any extra space at the end
             result = result.TrimEnd();
 
             Console.WriteLine(result);
         }
+       
+        
     }
+    public class ExcelReaders
+    {
+       
+        public static List<string[]> ReadExcel(string filePath)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            var data = new List<string[]>();
+
+            FileInfo fileInfo = new FileInfo(filePath);
+            using (var package = new ExcelPackage(fileInfo))
+            {
+                var worksheet = package.Workbook.Worksheets[0];
+                int rowCount = worksheet.Dimension.Rows;
+                int colCount = worksheet.Dimension.Columns;
+
+                for (int row = 2; row <= rowCount; row++) // assuming first row is header
+                {
+                    string[] rowData = new string[colCount];
+                    for(int col = 1; col <= colCount; col++)
+                    {
+                        rowData[col - 1] = worksheet.Cells[row, col].Text;
+                    }
+                    data.Add(rowData);
+                }
+            }
+
+            return data;
+        }
+    }
+    public class ExcelDataTest
+    {
+        [Test]
+        public void ReadExcelDataTest()
+        {
+            string path = @"C:\Users\Lenovo\OneDrive\Documents\Xpath_techtutorialz.xlsx";
+            List<string[]> excelData = ExcelReaders.ReadExcel(path);
+
+            foreach (var row in excelData)
+            {
+                TestContext.WriteLine($"Data: {string.Join(" | ", row)}");
+            }
+        }
+    }
+
 }

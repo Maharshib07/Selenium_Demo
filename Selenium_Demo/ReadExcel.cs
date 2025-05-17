@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OfficeOpenXml;
 using System.Globalization;
-using NUnit.Framework.Interfaces; // EPPlus for Excel handling
+//using NUnit.Framework.Interfaces; // EPPlus for Excel handling
 
 namespace Selenium_Demo
 {
@@ -142,6 +142,7 @@ namespace Selenium_Demo
             Console.WriteLine(sen);
 
             string[] Split = sen.Split(" ");
+           
 
             foreach (var split in Split)
             {
@@ -151,18 +152,79 @@ namespace Selenium_Demo
                     Console.Write(capital);
                 }
             }
-            foreach (var spy in Split)
-            {
-                string output = " ";
-                for (int i = 0; i < spy.Length; i++)
-                {
-                    if (i % 2 != 0)
-                    { output = (" " + char.ToUpper(spy[i]) + spy.Substring(1)); }
-                    // else { output =(char.ToLower(spy[i]) + spy.Substring(1) + " ");}
+           
+            //foreach (var spy in Split)
+            //{
+            //    string output = " ";
+            //    for (int i = 0; i < spy.Length; i++)
+            //    {
+            //        if (i % 2 != 0)
+            //        { output = (" " + char.ToUpper(spy[i]) + spy.Substring(1)); }
+            //        // else { output =(char.ToLower(spy[i]) + spy.Substring(1) + " ");}
 
-                    Console.WriteLine(output);
-                }
+            //        Console.WriteLine(output);
+            //    }
+            //}
+        }
+        [Test]
+        public void ReverseString()
+        {
+            string name = "Maharshi";
+            char[] reverse = name.ToCharArray();
+            string Reversename = "";  
+
+            for (int i = reverse.Length - 1; i >= 0; i--) 
+            {
+                Reversename += reverse[i]; 
             }
+
+            Console.WriteLine(Reversename);
+
+            Console.WriteLine(name.Reverse().ToArray());
+        }
+        [Test]
+        public void String()
+        {
+            string Name = "Markandeya";
+            Console.WriteLine(Name.Length);
+            Console.WriteLine(Name.Substring(1,6));
+            Console.WriteLine(Name.Replace('a','o'));
+            Console.WriteLine(Name.IndexOf('r'));
+
+            string name = "Maharshi";
+            Console.WriteLine(Name.CompareTo(name));
+            Console.WriteLine(name.Contains("Markan"));
+
+            Assert.IsTrue(Name.Contains("rkandeya"), "Name doesnt contains ");
+        }
+        [Test]
+        public void Palindrom()
+        {
+            string name = "LamaL";
+            name = name.ToUpper();
+            int left = 0;
+            int right = name.Length - 1;
+            bool palindrom = true;
+
+            while (left < right)
+            {
+                if (name[left] != name[right])
+                {
+                    palindrom = false;
+                    break;
+                }
+                left++;
+                right--;
+            }
+            if(palindrom)
+            {
+                Console.WriteLine(name + " is palindrom");
+            }
+            else
+            {
+                Console.WriteLine(name + " is not palindrom");
+            }
+            
         }
     }
     public class Program
@@ -206,9 +268,9 @@ namespace Selenium_Demo
 
             Console.WriteLine(result);
         }
-
-
     }
+
+
     public class ExcelReaders
     {
 
@@ -234,7 +296,6 @@ namespace Selenium_Demo
                     data.Add(rowData);
                 }
             }
-
             return data;
         }
     }
@@ -257,7 +318,6 @@ namespace Selenium_Demo
 
 
     public class ExcelReaderss
-
     {
         public static List<string[]> ReadExcel(string filePath, int rowLimit, int colLimit)
         {
@@ -281,10 +341,8 @@ namespace Selenium_Demo
                     data.Add(rowData);
                 }
             }
-
             return data;
         }
-
     }
     public class ExcelDataTests
     {

@@ -659,9 +659,6 @@ namespace Selenium_Learning
             //string alrtmsgs = alrtm.Text;
             //Assert.AreEqual("You selected Ok", alrtmsgs);
             //Console.WriteLine(alrtm.Text);
-
-
-
         }
         [Test]
         public void Alertsverify1()

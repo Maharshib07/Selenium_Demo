@@ -137,7 +137,7 @@ namespace CsharpCollections
             {
                 Console.WriteLine(value: $"{dict.Key}, {dict.Value}");
             }
-
+            
         }
         [Test]
         public void DictPractice()

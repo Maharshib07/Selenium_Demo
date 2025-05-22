@@ -142,7 +142,7 @@ namespace Selenium_Demo
             Console.WriteLine(sen);
 
             string[] Split = sen.Split(" ");
-           
+
 
             foreach (var split in Split)
             {
@@ -152,7 +152,7 @@ namespace Selenium_Demo
                     Console.Write(capital);
                 }
             }
-           
+
             //foreach (var spy in Split)
             //{
             //    string output = " ";
@@ -171,11 +171,11 @@ namespace Selenium_Demo
         {
             string name = "Maharshi";
             char[] reverse = name.ToCharArray();
-            string Reversename = "";  
+            string Reversename = "";
 
-            for (int i = reverse.Length - 1; i >= 0; i--) 
+            for (int i = reverse.Length - 1; i >= 0; i--)
             {
-                Reversename += reverse[i]; 
+                Reversename += reverse[i];
             }
 
             Console.WriteLine(Reversename);
@@ -187,8 +187,8 @@ namespace Selenium_Demo
         {
             string Name = "Markandeya";
             Console.WriteLine(Name.Length);
-            Console.WriteLine(Name.Substring(1,6));
-            Console.WriteLine(Name.Replace('a','o'));
+            Console.WriteLine(Name.Substring(1, 6));
+            Console.WriteLine(Name.Replace('a', 'o'));
             Console.WriteLine(Name.IndexOf('r'));
 
             string name = "Maharshi";
@@ -216,7 +216,7 @@ namespace Selenium_Demo
                 left++;
                 right--;
             }
-            if(palindrom)
+            if (palindrom)
             {
                 Console.WriteLine(name + " is palindrom");
             }
@@ -224,56 +224,68 @@ namespace Selenium_Demo
             {
                 Console.WriteLine(name + " is not palindrom");
             }
-            
-        }
-    }
-    public class Program
-    {
-        [Test]
-        public void Words()
-        {
-            string input = "Hi!  my name is Maharshi";
 
-            // Use TextInfo to capitalize each word
-            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
-            string result = textInfo.ToTitleCase(input.ToLower());
-
-            Console.WriteLine(result);
         }
         [Test]
-        public void Word2()
+        public void Vowels()
         {
-            string input = "Hi! my name is Maharshi";
-            string rang = input.ToLower();
-            string[] words = rang.Split(' ');
+            string Name = "MaharshiMarkandeya";
+            int Vowelsinwordcont = 0;
 
-            string result = "";
-
-            foreach (string word in words)
+            foreach (char nam in Name.ToLower())
             {
-                if (word.Length > 0)
+                if ("aeiou".Contains(nam))
                 {
-                    // Capitalize first character, keep rest as is
-                    string capitalized = char.ToUpper(word[0]) + word.Substring(1);
-                    result += capitalized + " ";
+                    Vowelsinwordcont++;
                 }
-                //else
-                //{
-                //    // Preserve multiple spaces
-                //    result += " ";
-                //}
+
             }
-            // Trim any extra space at the end
-            result = result.TrimEnd();
+            Console.WriteLine("Vowelscount in a word :" + Vowelsinwordcont);
 
-            Console.WriteLine(result);
         }
+       
+            [Test]
+            public void Words()
+            {
+                string input = "Hi!  my name is Maharshi";
+
+                // Use TextInfo to capitalize each word
+                TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+                string result = textInfo.ToTitleCase(input.ToLower());
+
+                Console.WriteLine(result);
+            }
+            [Test]
+            public void Word2()
+            {
+                string input = "Hi! my name is Maharshi";
+                string rang = input.ToLower();
+                string[] words = rang.Split(' ');
+
+                string result = "";
+
+                foreach (string word in words)
+                {
+                    if (word.Length > 0)
+                    {
+                        // Capitalize first character, keep rest as is
+                        string capitalized = char.ToUpper(word[0]) + word.Substring(1);
+                        result += capitalized + " ";
+                    }
+                    //else
+                    //{
+                    //    // Preserve multiple spaces
+                    //    result += " ";
+                    //}
+                }
+                // Trim any extra space at the end
+                result = result.TrimEnd();
+
+                Console.WriteLine(result);
+            }
     }
-
-
     public class ExcelReaders
     {
-
         public static List<string[]> ReadExcel(string filePath)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;

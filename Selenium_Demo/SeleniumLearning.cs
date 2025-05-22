@@ -24,6 +24,8 @@ using Microsoft.Office.Interop.Excel;
 using Actions = OpenQA.Selenium.Interactions.Actions;
 using System.Runtime.Intrinsics.X86;
 using OpenQA.Selenium.Internal;
+using OpenQA.Selenium.BiDi.Communication;
+using System.Collections.ObjectModel;
 
 //using ExcelDataReader;
 //using Microsoft.Office.Interop.Excel;
@@ -705,12 +707,11 @@ namespace Selenium_Learning
             dr.Close();
         }
         [Test]
-        public void CompaniesNamebyRank()
+        public void CompanyNamebyRank()
         {
-            {
-                Console.WriteLine(CompanyRank(3));
-            }
+            Console.WriteLine(CompanyRank(3)); 
         }
+
         public string CompanyRank(int rank)
         {
             IWebDriver dr = new ChromeDriver();
@@ -719,43 +720,58 @@ namespace Selenium_Learning
             Thread.Sleep(4000);
 
             IWebElement Companynamewill = dr.FindElement(By.XPath("(//table[@class='Topfilter_web_tbl_indices__Wa1Sj undefined'])//tbody//tr[" + rank + "]//td[1]"));
-            return Companynamewill.Text; 
+            return Companynamewill.Text;
 
         }
-        //[Test]
-        //public void CompaniesRankbyName()
-        //{
-        //    string Name = "SBI"; 
-        //    int rank = CompanyRank(Name);
-        //    if (rank != -1)
-        //    {
-        //        Console.WriteLine($"The rank of {Name} is: {rank}");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine($"{Name} was not found in the list.");
-        //    }
-        //}
-        //public int CompanyRank(string Name)
-        //{
-        //    IWebDriver dr = new ChromeDriver();
-        //    dr.Navigate().GoToUrl("https://www.moneycontrol.com/stocks/marketinfo/marketcap/bse/C.html");
-        //    dr.Manage().Window.Maximize();
-        //    Thread.Sleep(4000);
+            [Test]
+            public void Getcompanynamebyrank()
+            {
+                string cname = GetNamebyRank(7);
+                Console.WriteLine("Company namee is :" + cname);
+            }
+            public string GetNamebyRank(int rank)
+            {
+                IWebDriver dr = new ChromeDriver();
+                
 
-        //    IList<IWebElement> Companyrankwill = dr.FindElement(By.XPath("(//table[@class='Topfilter_web_tbl_indices__Wa1Sj undefined'])//tbody//tr[" + rank + "]//td[1]"));
-        //    int rank = -1;
-        //    for (int i = 0; i < Companyrankwill.Count; i++)
-        //    {
-        //        if (Companyrankwill[i].Text.Trim() == Name)
-        //        {
-        //            rank = i + 1;
-        //            break;
-        //        }
-        //    }
-        //    return rank;
-        //}
-        [Test]
+                dr.Navigate().GoToUrl("https://www.moneycontrol.com/stocks/marketinfo/marketcap/bse/index.html");
+                dr.Manage().Window.Maximize();
+                Thread.Sleep(20000);
+                
+                IWebElement ElementbyRank = dr.FindElement(By.XPath("//table/tbody/tr[" + rank + "]/td[1]/a"));
+                return ElementbyRank.Text;
+            }
+
+
+            [Test]
+            public void companyrank()
+            {
+                Console.WriteLine(GetRankByCompany("TCS"));
+            }
+            public int GetRankByCompany(string company)
+            {
+                IWebDriver dr = new ChromeDriver();
+                dr.Navigate().GoToUrl("https://www.moneycontrol.com/stocks/marketinfo/marketcap/bse/index.html");
+                dr.Manage().Window.Maximize();
+                Thread.Sleep(20000);
+                ReadOnlyCollection<IWebElement> rowList = dr.FindElements(By.XPath("//table/tbody/tr"));
+
+                int index = 0;
+                for (int i = 1; i <= rowList.Count; i++)
+                {
+                    IWebElement ElementbyRank = dr.FindElement(By.XPath("//table/tbody/tr[" + i + "]/td[1]/a"));
+                    string raname = ElementbyRank.Text;
+                    if (company == raname)
+                    {
+                            index = i;
+                            break;
+                    }
+                }
+
+                return Index;
+            }
+
+            [Test]
         public void FixedheaderWebTable()
         {
             string name = "Ben";
@@ -795,51 +811,9 @@ namespace Selenium_Learning
             dr.Quit();
 
         }
+            
 
-        //[Test]
-        //public void SearchText()
-        //{
-        //    IWebDriver dr = new ChromeDriver();
-        //    //System.Data.DataTable rishi = ReadExcel("C:\\Users\\Lenovo\\OneDrive\\Documents\\Xpath_techtutorialz.xlsx", null);
-
-        //    Console.WriteLine("Rows count is:" + rishi.Rows.Count); // Corrected the rows count
-        //    for (int i = 0; i < rishi.Rows.Count; i++)
-        //    {
-        //        // Navigate to Google
-        //        dr.Navigate().GoToUrl("http://google.com");
-
-        //        // Find the search box, enter search text, and hit Enter
-        //        dr.FindElement(By.Name("q")).SendKeys(rishi.Rows[i][0].ToString());
-        //        dr.FindElement(By.Name("q")).SendKeys(Keys.Enter);
-
-        //        // Optional: Add a wait here if needed, like a small delay between searches
-        //        Thread.Sleep(2000);
-
-        //    }
-        //}
-        //[Test]
-        //public DataTable ReadExcel(string fileName, string sheetName)
-        //{
-        //    WorkBook workbook = WorkBook.Load(fileName);
-        //    //// Work with a single WorkSheet.
-        //    ////you can pass static sheet name like Sheet1 to get that sheet
-        //    ////WorkSheet sheet = workbook.GetWorkSheet("Sheet1");
-        //    WorkSheet sheet = null;
-        //    //You can also use workbook.DefaultWorkSheet to get default in case you want to get first sheet only
-        //    if (sheetName.IsNullOrEmpty() == true)
-        //    {
-        //        sheet = workbook.DefaultWorkSheet;
-        //    }
-        //    else
-        //    {
-        //        sheet = workbook.GetWorkSheet(sheetName);
-        //    }
-
-        //    //Convert the worksheet to System.Data.DataTable
-        //    //Boolean parameter sets the first row as column names of your table.
-        //    return sheet.ToDataTable(true);
-        //}
-        [Test]
+            [Test]
         public void DisplayIPLLeaderboard()
         {
             IWebDriver driver = new ChromeDriver();
@@ -1049,5 +1023,6 @@ namespace Selenium_Learning
             SS.SaveAsFile("C:\\ScreenshotsSelenium\\ss.png");
 
         }
+       
     }
 }

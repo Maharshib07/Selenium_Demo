@@ -647,8 +647,8 @@ namespace Selenium_Learning
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
             IAlert alrt = dr.SwitchTo().Alert();  // Alert
-            String alrtMsg = dr.SwitchTo().Alert().Text; // reading alert	
-            Console.WriteLine(alrtMsg); //display alert
+            String alrtMsg = alrt.Text; 	
+            Console.WriteLine(alrt.Text); //display alert
 
             Thread.Sleep(1000);
             if (alrtMsg == "Do you confirm action?")

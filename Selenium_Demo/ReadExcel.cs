@@ -129,9 +129,146 @@ namespace Selenium_Demo
         }
     }
 
+    public class LetterCounter
+    {
+        [Test]
+        public void Dictpractice()
+        {
+            string name = "Maharshi";
+            Dictionary<char, int> letterCount = new Dictionary<char, int>();
+
+            foreach (var cont in name.ToLower())
+            {
+                if (char.IsLetter(cont)) // Ensuring only letters are counted
+                {
+                    if (letterCount.ContainsKey(cont))
+                    {
+                        letterCount[cont]++;
+                    }
+                    else
+                    {
+                        letterCount[cont] = 1;
+                    }
+                }
+            }
+
+            foreach (var item in letterCount)
+            {
+                Console.WriteLine($"Letter: {item.Key}, Count: {item.Value}");
+            }
+        }
+        //public void TestDictpractice()
+        //{
+        //    LetterCounter counter = new LetterCounter();
+        //    counter.Dictpractice();
+        //}
+
+
+        public void NameCount(string Name)
+        {
+
+            Dictionary<char, int> LetterCount = new Dictionary<char, int>();
+
+            foreach (var letter in Name.ToLower())
+            {
+                if (char.IsLetter(letter))
+                {
+                    if (LetterCount.ContainsKey(letter))
+                    {
+                        LetterCount[letter]++;
+                    }
+                    else
+                    {
+                        LetterCount[letter] = 1;
+                    }
+                }
+
+            }
+            foreach (var item in LetterCount)
+            {
+                Console.WriteLine($"Letter : {item.Key}, Count : {item.Value}");
+            }
+        }
+        [Test]
+        public void Letter()
+        {
+            LetterCounter nam = new LetterCounter();
+            nam.NameCount("B.M.MahA12rshi");
+
+        }
+    }
+    class Primeselect
+    {
+        [Test]
+        public void Prm()
+        {
+            int[] numbers = { 12, 52, 23, 7, 6 };
+
+            List<int> primeNumbers = new List<int>();
+
+            foreach (int num in numbers)
+            {
+                if (IsPrime(num))
+                {
+                    primeNumbers.Add(num);
+                }
+            }
+
+            Console.WriteLine("Prime numbers:"); // print primenumbers
+            foreach (int prime in primeNumbers)
+            {
+                Console.WriteLine(prime);
+            }
+        }
+        static bool IsPrime(int num) // checking the number are prime 
+        {
+            if (num <= 1) return false; // 0 and 1 are not prime
+            if (num == 2) return true;  // 2 is prime
+
+            // Only check for factors up to the square root of the number
+            for (int i = 2; i <= Math.Sqrt(num); i++)
+            {
+                if (num % i == 0) return false; // Divisible, so not prime
+            }
+
+            return true;
+        }
+        [Test]
+        public void PrimeTime()
+        {
+
+            List<int> PrimeNumbers = new List<int>();
+            for (int i = 0; i <= 100; i++)
+            {
+                if (IsPrime(i))
+                {
+                    PrimeNumbers.Add(i);
+                }
+            }
+            foreach (int prime in PrimeNumbers)
+            {
+                Console.Write(prime + ", ");
+            }
+        }
+
+        static bool PrimeNum(int i)
+        {
+            if (i <= 1) return false;
+            if (i == 2) return true;
+
+            for (i = 0; i < Math.Sqrt(i); i++)
+            {
+                if (i % i == 0) return false;
+            }
+            return true;
+        }
+    }
+
 
     public class SentenceSplit
     {
+
+
         [Test]
         public void BreakingSentence()
         {
@@ -152,20 +289,8 @@ namespace Selenium_Demo
                     Console.Write(capital);
                 }
             }
-
-            //foreach (var spy in Split)
-            //{
-            //    string output = " ";
-            //    for (int i = 0; i < spy.Length; i++)
-            //    {
-            //        if (i % 2 != 0)
-            //        { output = (" " + char.ToUpper(spy[i]) + spy.Substring(1)); }
-            //        // else { output =(char.ToLower(spy[i]) + spy.Substring(1) + " ");}
-
-            //        Console.WriteLine(output);
-            //    }
-            //}
         }
+
         [Test]
         public void ReverseString()
         {
@@ -238,51 +363,49 @@ namespace Selenium_Demo
                 {
                     Vowelsinwordcont++;
                 }
-
             }
             Console.WriteLine("Vowelscount in a word :" + Vowelsinwordcont);
-
         }
-       
-            [Test]
-            public void Words()
+
+        [Test]
+        public void Words()
+        {
+            string input = "Hi!  my name is Maharshi";
+
+            // Use TextInfo to capitalize each word
+            TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+            string result = textInfo.ToTitleCase(input.ToLower());
+
+            Console.WriteLine(result);
+        }
+        [Test]
+        public void Word2()
+        {
+            string input = "Hi! my name is Maharshi";
+            string rang = input.ToLower();
+            string[] words = rang.Split(' ');
+
+            string result = "";
+
+            foreach (string word in words)
             {
-                string input = "Hi!  my name is Maharshi";
-
-                // Use TextInfo to capitalize each word
-                TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
-                string result = textInfo.ToTitleCase(input.ToLower());
-
-                Console.WriteLine(result);
-            }
-            [Test]
-            public void Word2()
-            {
-                string input = "Hi! my name is Maharshi";
-                string rang = input.ToLower();
-                string[] words = rang.Split(' ');
-
-                string result = "";
-
-                foreach (string word in words)
+                if (word.Length > 0)
                 {
-                    if (word.Length > 0)
-                    {
-                        // Capitalize first character, keep rest as is
-                        string capitalized = char.ToUpper(word[0]) + word.Substring(1);
-                        result += capitalized + " ";
-                    }
-                    //else
-                    //{
-                    //    // Preserve multiple spaces
-                    //    result += " ";
-                    //}
+                    // Capitalize first character, keep rest as is
+                    string capitalized = char.ToUpper(word[0]) + word.Substring(1);
+                    result += capitalized + " ";
                 }
-                // Trim any extra space at the end
-                result = result.TrimEnd();
-
-                Console.WriteLine(result);
+                //else
+                //{
+                //    // Preserve multiple spaces
+                //    result += " ";
+                //}
             }
+            // Trim any extra space at the end
+            result = result.TrimEnd();
+
+            Console.WriteLine(result);
+        }
         [Test]
         public void Anagram()
         {
@@ -311,6 +434,24 @@ namespace Selenium_Demo
                 }
                 Console.WriteLine("Its anagram :" + name2);
             }
+        }
+    }
+    public class ReadWriteTXTfile
+    {
+        [Test]
+        public void ReadFile()
+        {
+            string path = $"C:\\Users\\Lenovo\\OneDrive\\Documents\\TableXpath.txt";
+            string readfile = File.ReadAllText(path);
+            Console.WriteLine(readfile);
+        }
+        [Test]
+        public void Writefile()
+        {
+            string path = "C:\\PDF.s\\Rishi.txt";
+            string write = "Hey! How are u hsxh";
+            //File.WriteAllText(path, write);
+            File.AppendAllText(path, write);
         }
     }
 
@@ -403,3 +544,4 @@ namespace Selenium_Demo
         }
     }
 }
+

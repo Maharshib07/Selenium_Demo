@@ -283,7 +283,37 @@ namespace Selenium_Demo
 
                 Console.WriteLine(result);
             }
+        [Test]
+        public void Anagram()
+        {
+            string name1 = "Maharshi";
+            string name2 = "aaMhihsi";
+
+            char[] nam1 = name1.ToCharArray();
+            char[] nam2 = name2.ToCharArray();
+
+            Array.Sort(nam1);
+            Array.Sort(nam2);
+
+            if (nam1.Length != nam2.Length)
+            {
+                Console.WriteLine("Not anagram");
+            }
+            else
+            {
+                for (int i = 0; i < nam1.Length; i++)
+                {
+                    if (nam1[i] != nam2[i])
+                    {
+                        Console.WriteLine("not anagram");
+                        return;
+                    }
+                }
+                Console.WriteLine("Its anagram :" + name2);
+            }
+        }
     }
+
     public class ExcelReaders
     {
         public static List<string[]> ReadExcel(string filePath)

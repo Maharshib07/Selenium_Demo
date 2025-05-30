@@ -1,31 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using OpenQA.Selenium.Support.UI;
-using System.Security.Cryptography.X509Certificates;
-using System.Drawing;
-
-using OpenQA.Selenium.Interactions;
-using static System.Collections.Specialized.BitVector32;
-using static System.Net.WebRequestMethods;
 using NUnit.Framework.Internal;
-using NUnit.Framework;
-using static System.Net.Mime.MediaTypeNames;
-using System.Data;
-using System.Net.NetworkInformation;
-using Microsoft.Office.Interop.Excel;
 using Actions = OpenQA.Selenium.Interactions.Actions;
-using System.Runtime.Intrinsics.X86;
-using OpenQA.Selenium.Internal;
-using OpenQA.Selenium.BiDi.Communication;
 using System.Collections.ObjectModel;
+using DataTable = System.Data.DataTable;
 
 //using ExcelDataReader;
 //using Microsoft.Office.Interop.Excel;
@@ -129,6 +109,7 @@ namespace Selenium_Learning
     }
     class pracSelenium()
     {
+       
 
         [Test]
         public void Login()
@@ -409,15 +390,41 @@ namespace Selenium_Learning
             dr.Quit();
 
         }
+        //private Utilities _utilities = new Utilities();
+        //[Test]
+        //public void AmazonVerifyLogin()
+        //{
+        //    IWebDriver dr = new EdgeDriver();
+
+        //    DataTable Rishiamzsign = _utilities.ReadExcel("C:\\Users\\Lenovo\\OneDrive\\Documents\\Xpath_techtutorialz.xlsx", null);
+        //    Console.WriteLine("Rows count is:" + Rishiamzsign.Rows);
+        //    //for (int i = 0; i < Rishiamzsign.Rows.Count; i++)
+        //    {
+        //        dr.Navigate().GoToUrl("https://www.amazon.in/");
+        //        dr.FindElement(By.XPath("//span[text()='Hello, sign in']")).Click();
+        //        dr.FindElement(By.XPath("//input[@name='email']")).SendKeys(Rishiamzsign.Rows[11][0].ToString());
+        //        dr.FindElement(By.XPath("//input[@class='a-button-input']")).Click();
+        //        dr.FindElement(By.Name("password")).SendKeys(Rishiamzsign.Rows[11][1].ToString());
+        //        dr.FindElement(By.XPath("//input[@id='signInSubmit']")).Click();
+        //        //IWebElement errMsg = dr.FindElement(By.XPath("//div[text()='Invalid username or password'] | //span[text()='Forgotten password?']"));
+        //        //Assert.IsTrue(errMsg.Displayed, "Login is success");
+        //        Thread.Sleep(2000);
+        //    }
+        //    dr.Close();
+
+        //}
+
         [Test]
         public void Axismf()
         {
-            IWebDriver dr = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            //options.AddArguments("disable-popup-blocking");
+            //options.AddArguments("start-maximized");
+            
+            IWebDriver dr = new ChromeDriver(options);
             dr.Navigate().GoToUrl("https://www.axismf.com/");
             // DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(dr);
-            ChromeOptions options = new ChromeOptions();
-            // options.AddArguments("disable-popup-blocking");
-            //options.AddArguments("start-maximized");
+           
             dr.Manage().Window.Maximize();
             dr.FindElement(By.XPath("//div[@id='nvpush_cross']")).Click();
             dr.FindElement(By.XPath("(//li[@class='buttonModalLi ng-star-inserted'])[3]")).Click();
@@ -428,16 +435,37 @@ namespace Selenium_Learning
             //Thread.Sleep(1000); 
             dr.FindElement(By.XPath("(//input[@class='native-input sc-ion-input-md'])[6]")).SendKeys("Rishi123");
             IWebElement error = dr.FindElement(By.XPath("//div[@class='danger ng-star-inserted']"));
-            Assert.IsTrue(error.Size != Size.Empty, "Error msg not displayed");
-            // Assert.True(error.Displayed == true, "Error msg not displayed");
+            //Assert.IsTrue(error.Size != Size.Empty, "Error msg not displayed");
+            Assert.True(error.Displayed == true, "Error msg not displayed");
             Thread.Sleep(3000);
             dr.Close();
+        }
+
+       
+        public void ClickonIcon(string strIconText)
+        {
+            //string strIconText = "Internet";
+            IWebDriver dr = new ChromeDriver();
+            dr.Navigate().GoToUrl("https://www.att.com/");
+            System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> listIcons = dr.FindElements(By.XPath("//ul[@class='jsx-2592051375 centered nowrap']/li//a"));
+
+            for (int i = 0; i < listIcons.Count; i++)
+            {
+                if (listIcons[i].Text == strIconText)
+                {
+                    listIcons[i].Click();
+                    break;
+                }
+            }
+        }
+        [Test]
+        public void Clickon()
+        {
+            ClickonIcon("Wireless");
         }
     }
     public class ActionsPerform
     {
-
-
         [Test]
         public void DragandDropVerify()
         {
@@ -499,8 +527,8 @@ namespace Selenium_Learning
             Thread.Sleep(3000);
             dr.Close();
         }
-        [Test]
 
+        [Test]
         public void RightClickverify()
         {
             IWebDriver dr = new ChromeDriver();
@@ -564,8 +592,6 @@ namespace Selenium_Learning
             IWebElement ele = dr.FindElement(By.XPath("((//img[@title='Flipkart'])[1])//."));
             string stitle = ele.GetAttribute("title");
             Assert.IsTrue(stitle == "Flipkart", "Title not found");
-
-
             dr.Close();
 
             //Finding by Text
@@ -584,7 +610,6 @@ namespace Selenium_Learning
             IWebElement ele = dr.FindElement(By.XPath("//input[@name='q']"));
             IJavaScriptExecutor js = (IJavaScriptExecutor)dr;
             js.ExecuteScript("arguments[0].value='Motorola Edge 50';", ele);
-
 
             string stitle = ele.GetAttribute("value");
             Assert.IsTrue(stitle == "Motorola Edge 50", "Text not entered");
@@ -692,8 +717,6 @@ namespace Selenium_Learning
     }
     public class WebTable
     {
-        //private object utilities;
-
         [Test]
         public void readwebtable()
         {
@@ -712,7 +735,6 @@ namespace Selenium_Learning
         {
             Console.WriteLine("Company name is :" + CompanyRank(3));
         }
-
         public string CompanyRank(int rank)
         {
             IWebDriver dr = new ChromeDriver();
@@ -722,8 +744,8 @@ namespace Selenium_Learning
 
             IWebElement Companynamewill = dr.FindElement(By.XPath("(//table[@class='Topfilter_web_tbl_indices__Wa1Sj undefined'])//tbody//tr[" + rank + "]//td[1]"));
             return Companynamewill.Text;
-
         }
+
         [Test]
         public void Getcompanynamebyrank()
         {
@@ -740,7 +762,6 @@ namespace Selenium_Learning
             IWebElement ElementbyRank = dr.FindElement(By.XPath("//table/tbody/tr[" + rank + "]/td[1]/a"));
             return ElementbyRank.Text;
         }
-
 
         [Test]
         public void companyrank()
@@ -1020,6 +1041,7 @@ namespace Selenium_Learning
             dr.Navigate().GoToUrl("https://www.flipkart.com");
             ITakesScreenshot Screensht = (ITakesScreenshot)dr;
             Screenshot SS = Screensht.GetScreenshot();
+            //Screenshot ss = ((ITakesScreenshot)dr).GetScreenshot();
             SS.SaveAsFile("C:\\ScreenshotsSelenium\\ss.png");
 
         }

@@ -1,12 +1,8 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Selenium_Demo
 {
@@ -19,7 +15,6 @@ namespace Selenium_Demo
             options.AddArgument("incognito");
             IWebDriver dr = new ChromeDriver(options);
             
-           
             string[] cityname = new string[] { "Columbus", "Cincinnati", "Dayton", "Cleveland", "Toledo", "Other" };
             for (int i = 0; i < cityname.Length; i++)
             {
@@ -61,7 +56,6 @@ namespace Selenium_Demo
                 IWebElement btnPost = dr.FindElement(By.XPath("//input[@type='submit']"));
                 btnPost.Click();
                 Thread.Sleep(2000);
-               
             }
            dr.Close();
         }

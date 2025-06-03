@@ -92,6 +92,7 @@ namespace CsharpLoops
                 else if (Name == "asha") return 0;
                 else return 0;
 
+
             }
             [Test]
             public void Rays()

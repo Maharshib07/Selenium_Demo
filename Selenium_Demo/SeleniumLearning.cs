@@ -799,6 +799,7 @@ namespace Selenium_Learning
             }
             finally
             {
+
                 Thread.Sleep(1000);
                 driver.Close();
             }

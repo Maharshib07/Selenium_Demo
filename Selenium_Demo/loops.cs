@@ -3,7 +3,7 @@ using System;
 
 namespace CsharpLoops
 {
-    public class Loops
+    public class looops
     {
         [Test]
         public void ForLoopInt()
@@ -11,12 +11,12 @@ namespace CsharpLoops
             int x = 10;
             for (x = 0; x <= 10; x++)
             {
-                
-              if(x==6)
-              {
-                Console.WriteLine("\nBreaking at :" + x);
-                break;
-              }
+
+                if (x == 6)
+                {
+                    Console.WriteLine("\nBreaking at :" + x);
+                    break;
+                }
                 Console.WriteLine("\nNumbers are :" + x);
             }
         }
@@ -31,12 +31,13 @@ namespace CsharpLoops
 
             for (int i = 0; i < bikes.Length; i++)
             {
-                if (bikes[i]=="Model")
+                if (bikes[i] == "Model")
                 {
                     Console.WriteLine("Kicking :" + bikes[i]);
                     continue;
                 }
-               // Console.WriteLine(bikes[i]);
+                Console.WriteLine(bikes[i]);
+                // Console.WriteLine(bikes[i]);
             }
         }
         [Test]
@@ -50,8 +51,8 @@ namespace CsharpLoops
         }
         public class MethodRecall()
         {
-          public void ageofstud(int snum)
-          {
+            public void ageofstud(int snum)
+            {
 
                 if (snum == 10)
                 {
@@ -69,19 +70,19 @@ namespace CsharpLoops
                 {
                     Console.WriteLine("Asha age : 0");
                 }
-          }
+            }
         }
         public class MethodRecalls()
         {
-          [Test]
-          public void ageofperson()
-          {
-              MethodRecall tests = new MethodRecall();
-              tests.ageofstud(40);
-          }
+            [Test]
+            public void ageofperson()
+            {
+                MethodRecall tests = new MethodRecall();
+                tests.ageofstud(40);
+            }
         }
         public class Methodrrecall()
-        {  
+        {
             public int Ray(string Name)
             {
                 Name = Name.ToLower();
@@ -92,17 +93,54 @@ namespace CsharpLoops
                 else if (Name == "asha") return 0;
                 else return 0;
 
-
             }
             [Test]
             public void Rays()
             {
                 Methodrrecall roy = new Methodrrecall();
                 int result = roy.Ray("anand");
-            }
 
+                
+
+            }
         }
     }
-    
+    class Primeselect
+    {
+        [Test]
+        public void Prm()
+        { 
+            int[] numbers = { 12, 52, 23, 7, 6 };
+
+            List<int> primeNumbers = new List<int>();
+
+            foreach (int num in numbers)
+            {
+                if (IsPrime(num))
+                {
+                    primeNumbers.Add(num);
+                }
+            }
+
+            Console.WriteLine("Prime numbers:"); // print primenumbers
+            foreach (int prime in primeNumbers)
+            {
+                Console.WriteLine(prime);
+            }
+        }
+        static bool IsPrime(int num) // checking the number are prime 
+        {
+            if (num <= 1) return false; // 0 and 1 are not prime
+            if (num == 2) return true;  // 2 is prime
+
+            // Only check for factors up to the square root of the number
+            for (int i = 2; i <= Math.Sqrt(num); i++)
+            {
+                if (num % i == 0) return false; // Divisible, so not prime
+            }
+
+            return true;
+        }
+    }
 
 }

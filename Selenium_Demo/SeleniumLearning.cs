@@ -440,8 +440,6 @@ namespace Selenium_Learning
             Thread.Sleep(3000);
             dr.Close();
         }
-
-       
         public void ClickonIcon(string strIconText)
         {
             //string strIconText = "Internet";
@@ -544,7 +542,6 @@ namespace Selenium_Learning
             Thread.Sleep(2000);
             dr.Close();
 
-
         }
         [Test]
         public void Keydownwithoutsendkeys()
@@ -581,8 +578,8 @@ namespace Selenium_Learning
             Thread.Sleep(2000);
             Actions action = new Actions(dr);
             IWebElement linkTL = dr.FindElement(By.XPath("//img[@alt='Kilos']"));
-            action.KeyDown(linkTL, Keys.Enter).Build().Perform();
-
+            action.KeyDown(linkTL,"").Build().Perform();
+            
             //finding by URl
             //string expectedURL ="https://www.flipkart.com/grocery-supermart-store?marketplace=GROCERY&fm=neo%2Fmerchandising&iid=M_cb1e70ed-524b-4444-9a36-0f88326af4b9_1_372UD5BXDFYS_MC.CBUR1Q46W5F1&otracker=hp_rich_navigation_1_1.navigationCard.RICH_NAVIGATION_Kilos_CBUR1Q46W5F1&otracker1=hp_rich_navigation_PINNED_neo%2Fmerchandising_NA_NAV_EXPANDABLE_navigationCard_cc_1_L0_view-all&cid=CBUR1Q46W5F1";
             //string actualURl = dr.Url;
@@ -671,9 +668,9 @@ namespace Selenium_Learning
             act.MoveToElement(ele).Click().Build().Perform();
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-            IAlert alrt = dr.SwitchTo().Alert();  // Alert
+            IAlert alrt = dr.SwitchTo().Alert();
             String alrtMsg = alrt.Text; 	
-            Console.WriteLine(alrt.Text); //display alert
+            Console.WriteLine(alrt.Text); //display alert msg
 
             Thread.Sleep(1000);
             if (alrtMsg == "Do you confirm action?")
@@ -844,9 +841,6 @@ namespace Selenium_Learning
             {
                 //IPL leaderboard page
                 driver.Navigate().GoToUrl("https://www.cricbuzz.com/cricket-series/9237/indian-premier-league-2025/points-table");
-
-
-
                 IWebElement table = driver.FindElement(By.XPath("(//table[@class='table cb-srs-pnts']//tbody)[1]"));
 
                 //table rows
@@ -858,20 +852,25 @@ namespace Selenium_Learning
 
                 for (int i = 0; i < rows.Count; i++)
                 {
-                    IList<IWebElement> cells = rows[i].FindElements(By.XPath("//td[@class='cb-srs-pnts-name']/."));
 
-                    if (cells.Count >= 8)
-                    {
-                        string team = cells[0].Text.Trim();
-                        string matches = cells[1].Text.Trim();
-                        string won = cells[2].Text.Trim();
-                        string lost = cells[3].Text.Trim();
-                        string tied = cells[4].Text.Trim();
-                        string NR = cells[5].Text.Trim();
-                        string pts = cells[6].Text.Trim();
-                        string NRR = cells[7].Text.Trim();
-                        Console.WriteLine($"{team} | {matches} | {won} | {lost} | {tied}  |  {NR}  |  {pts} | {NRR} ");
-                    }
+                    Console.WriteLine(rows[i].Text + "\n");
+                    
+                    //IList<IWebElement> cells = rows[i].FindElements(By.XPath("//td[@class='cb-srs-pnts-name']/."));
+
+                    //for (int j = 0; j < cells.Count; j++)
+                    //{
+                    //    string team = cells[0].Text;
+                    //    string matches = cells[1].Text;
+                    //    string won = cells[2].Text;
+                    //    string lost = cells[3].Text;
+                    //    string tied = cells[4].Text;
+                    //    string NR = cells[5].Text;
+                    //    string pts = cells[6].Text;
+                    //    string NRR = cells[7].Text;
+                        
+                    //    Console.WriteLine($"{team} | {matches} | {won} | {lost} | {tied}  |  {NR}  |  {pts} | {NRR} ");
+                    //    break;
+                    //}
                 }
             }
             catch (NoSuchElementException ex)

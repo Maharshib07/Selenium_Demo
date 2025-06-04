@@ -3,7 +3,7 @@ using System;
 
 namespace CsharpLoops
 {
-    public class loops
+    public class Loops
     {
         [Test]
         public void ForLoopInt()
@@ -91,6 +91,7 @@ namespace CsharpLoops
                 else if (Name == "anvesh") return 9;
                 else if (Name == "asha") return 0;
                 else return 0;
+
 
             }
             [Test]

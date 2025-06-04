@@ -8,6 +8,7 @@ using System.Runtime.ConstrainedExecution;
 using NUnit.Framework;
 using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json.Linq;
+using OpenQA.Selenium.DevTools.V131.Browser;
 
 namespace CsharpOOps
 {
@@ -19,7 +20,7 @@ namespace CsharpOOps
     // Pig "implements" the IAnimal interface
     public class InterfPig : IAnimal
     {
-        [Test]
+        
         public void animalSound()
         {
             // The body of animalSound() is provided here
@@ -74,7 +75,7 @@ namespace CsharpOOps
     }
     public class AbsCow : Ani
     {
-        [Test]
+        
         public override void anison()
         {
             Console.WriteLine("Aa..");
@@ -101,7 +102,7 @@ namespace CsharpOOps
             return x + y;
         }
         
-        public int Add(int x, int y, int z)
+        public int Ad(int x, int y, int z)
         {
             return x + y + z;
         }
@@ -149,7 +150,7 @@ namespace CsharpOOps
         }
         public override double Are()
         {
-            return 7 ^ 2; // ht*width
+            return 7 ^ 2; // 
         }
     }
     public class overrideSum
@@ -163,13 +164,32 @@ namespace CsharpOOps
             Console.WriteLine("Area :" + sq.Are());
         }  
     }
+    class PhoneNum
+    {
+        private long phnNO = 23456789;
+        public long PNo
+        {
+            get { return phnNO; }
+            set
+            {
+                if (value > 1000000000 && value < 9999999999)
+                { phnNO = value; }
+                else
+                {
+                    Console.WriteLine("Invalid PHNo.. Enter Correct Phone Number\n Default Num Is :");
+                }
+            }
+        }
+    }
+    class Encapsculation
+    {
+        [Test]
+        public static void Number()
+        {
+            PhoneNum Num = new PhoneNum();
+            Num.PNo = 6575159896;
+            Console.WriteLine(Num.PNo);
+           
+        }
+    }
 }
-      
-
-       
-
-    
-    
-
-
-

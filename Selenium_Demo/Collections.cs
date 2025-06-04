@@ -24,6 +24,9 @@ namespace CsharpCollections
             Students.Add("Rajesh");
             Students.Add("Ramesh");
             Students.Add("Rahul");
+            Students.Add(null);
+            Students.Add("Rishi");
+            
 
             foreach (string student in Students)
             {
@@ -46,7 +49,7 @@ namespace CsharpCollections
             {
                 Console.Write(Nms[i] + "  ");
             }
-            Console.Write(Nms.Capacity);
+            //Console.Write(Nms.Capacity);
         }
         [Test]
         public void HashCollection()
@@ -80,10 +83,11 @@ namespace CsharpCollections
             {
                 Console.WriteLine(dist);
             }
-            dist.Remove(2); // To Remove  key
+            Dist.Remove(2); // To Remove  key;
 
             foreach (var dict in Dist)
             {
+                
                 Console.WriteLine(value: $"{dict.Key} {dict.Value}");
             }
         }
@@ -131,9 +135,9 @@ namespace CsharpCollections
 
             foreach (DictionaryEntry dict in Books)
             {
-                Console.WriteLine(value: $"{dict.Key} {dict.Value}");
+                Console.WriteLine(value: $"{dict.Key}, {dict.Value}");
             }
-
+            
         }
         [Test]
         public void DictPractice()
@@ -154,48 +158,9 @@ namespace CsharpCollections
 
             foreach (var dict in Books)
             {
-                Console.WriteLine(value: $"{dict.Key} {dict.Value}");
+                Console.WriteLine(value: $"{dict.Key}, {dict.Value}");
             }
         }
 
-    }
-    public class LetterCounter
-    {
-        [Test]
-        public void Dictpractice()
-        {
-            string name = "Maharshi";
-            Dictionary<char, int> letterCount = new Dictionary<char, int>();
-
-            foreach (var cont in name.ToLower())
-            {
-                if (char.IsLetter(cont)) // Ensuring only letters are counted
-                {
-                    if (letterCount.ContainsKey(cont))
-                    {
-                        letterCount[cont]++;
-                    }
-                    else
-                    {
-                        letterCount[cont] = 1;
-                    }
-                }
-            }
-
-            foreach (var item in letterCount)
-            {
-                Console.WriteLine($"Letter: {item.Key}, Count: {item.Value}");
-            }
-        }
-        public void TestDictpractice()
-        {
-            LetterCounter counter = new LetterCounter();
-            counter.Dictpractice();
-        }
     }
 }
-
-    
-    
-
-

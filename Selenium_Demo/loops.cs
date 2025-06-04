@@ -3,7 +3,7 @@ using System;
 
 namespace CsharpLoops
 {
-    public class loops
+    public class Loops
     {
         [Test]
         public void ForLoopInt()
@@ -36,7 +36,7 @@ namespace CsharpLoops
                     Console.WriteLine("Kicking :" + bikes[i]);
                     continue;
                 }
-                Console.WriteLine(bikes[i]);
+               // Console.WriteLine(bikes[i]);
             }
         }
         [Test]
@@ -92,55 +92,17 @@ namespace CsharpLoops
                 else if (Name == "asha") return 0;
                 else return 0;
 
+
             }
             [Test]
             public void Rays()
             {
                 Methodrrecall roy = new Methodrrecall();
                 int result = roy.Ray("anand");
-
-                
-
             }
 
         }
     }
-    class Primeselect
-    {
-        [Test]
-        public void Prm()
-        { 
-            int[] numbers = { 12, 52, 23, 7, 6 };
-
-            List<int> primeNumbers = new List<int>();
-
-            foreach (int num in numbers)
-            {
-                if (IsPrime(num))
-                {
-                    primeNumbers.Add(num);
-                }
-            }
-
-            Console.WriteLine("Prime numbers:"); // print primenumbers
-            foreach (int prime in primeNumbers)
-            {
-                Console.WriteLine(prime);
-            }
-        }
-        static bool IsPrime(int num) // checking the number are prime 
-        {
-            if (num <= 1) return false; // 0 and 1 are not prime
-            if (num == 2) return true;  // 2 is prime
-
-            // Only check for factors up to the square root of the number
-            for (int i = 2; i <= Math.Sqrt(num); i++)
-            {
-                if (num % i == 0) return false; // Divisible, so not prime
-            }
-
-            return true;
-        }
-    }
+    
 
 }

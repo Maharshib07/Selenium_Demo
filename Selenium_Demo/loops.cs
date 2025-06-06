@@ -3,7 +3,7 @@ using System;
 
 namespace CsharpLoops
 {
-    public class looops
+    public class Looops
     {
         [Test]
         public void ForLoopInt()

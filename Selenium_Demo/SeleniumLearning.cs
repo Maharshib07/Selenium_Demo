@@ -670,7 +670,7 @@ namespace Selenium_Learning
 
             IAlert alrt = dr.SwitchTo().Alert();
             String alrtMsg = alrt.Text; 	
-            Console.WriteLine(alrt.Text); //display alert msg
+            Console.WriteLine(alrtMsg); //display alert msg
 
             Thread.Sleep(1000);
             if (alrtMsg == "Do you confirm action?")
@@ -697,8 +697,8 @@ namespace Selenium_Learning
             IWebElement ele = dr.FindElement(By.XPath("//button[@class='btn btn-danger']"));
             act.MoveToElement(ele).Click().Build().Perform();
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            IAlert alrt = dr.SwitchTo().Alert();  // Alert   
-            var alrtMsg = dr.SwitchTo().Alert().Text; // reading alert	
+            IAlert alrt = dr.SwitchTo().Alert();  // Alert
+            var alrtMsg = dr.SwitchTo().Alert().Text; // reading alert
             Console.WriteLine(alrtMsg); //display alert
 
             Thread.Sleep(1000);
@@ -739,6 +739,7 @@ namespace Selenium_Learning
             dr.Manage().Window.Maximize();
             Thread.Sleep(4000);
 
+
             IWebElement Companynamewill = dr.FindElement(By.XPath("(//table[@class='Topfilter_web_tbl_indices__Wa1Sj undefined'])//tbody//tr[" + rank + "]//td[1]"));
             return Companynamewill.Text;
         }
@@ -764,6 +765,7 @@ namespace Selenium_Learning
         public void companyrank()
         {
             Console.WriteLine(GetRankByCompany("TCS"));
+           
         }
         public int GetRankByCompany(string company)
         {
@@ -784,8 +786,6 @@ namespace Selenium_Learning
                     break;
                 }
             }
-            Console.WriteLine("TCS rank is :");
-
             return index;
         }
 
@@ -802,7 +802,6 @@ namespace Selenium_Learning
             IWebElement table = dr.FindElement(By.XPath("(//table[@id='product'])[2]"));
             IList<IWebElement> rows = table.FindElements(By.TagName("tr"));
             // Console.WriteLine("Number of rows: " + rows.Count);
-
 
             for (int i = 0; i < rows.Count; i++)
             {
@@ -827,9 +826,7 @@ namespace Selenium_Learning
                 }
             }
             dr.Quit();
-
         }
-
 
         [Test]
         public void DisplayIPLLeaderboard()
@@ -892,12 +889,17 @@ namespace Selenium_Learning
             dr.Manage().Window.Maximize();
             dr.Navigate().GoToUrl("https://www.cricbuzz.com/cricket-team/chennai-super-kings/58/schedule");
             //IWebElement chevsBan =  dr.FindElement(By.XPath("//div[@class='cb-bg-white cb-col-100 cb-col cb-hm-rght']//following::div[@class='cb-col-100 cb-col cb-series-matches ng-scope']"));
-            //Console.WriteLine(chevsBan.Text, "Shedules not found");  
-            var ele = dr.FindElement(By.XPath("//html//body//div[@class='cb-col-100 cb-col cb-series-matches ng-scope']"));
+            //Console.WriteLine(chevsBan.Text, "Shedules not found");
+            try
+            {
+                var ele = dr.FindElement(By.XPath("//html//body//div[@class='cb-col-100 cb-col cb-series-matches ng-scope']"));
 
-            Console.WriteLine(ele);
-
-
+                Console.WriteLine(ele);
+            }
+            catch(NoSuchElementException msg)
+            {
+                Console.WriteLine(msg);
+            }
         }
         [Test]
         public void ErrorHandling()
@@ -907,7 +909,6 @@ namespace Selenium_Learning
             dr.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             try
             {
-
                 dr.Navigate().GoToUrl("https://www.cricbuzz.com/");
                 dr.Manage().Window.Maximize();
                 dr.FindElement(By.XPath("//span[text()='IPL 2025']")).Click();
@@ -945,8 +946,9 @@ namespace Selenium_Learning
                 }
             }
             finally
-            { }
-            dr.Quit();
+            {
+                dr.Quit();
+            }
         }
     }
 
@@ -1045,6 +1047,5 @@ namespace Selenium_Learning
             SS.SaveAsFile("C:\\ScreenshotsSelenium\\ss.png");
 
         }
-
     }
 }

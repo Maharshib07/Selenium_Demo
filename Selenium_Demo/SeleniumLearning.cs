@@ -82,6 +82,7 @@ namespace Selenium_Learning
             Console.WriteLine("options count is:" + optCount);
 
             //objSelect.DeselectByValue("CHINA");
+            
             //for (int i = 0; i < optCount; i++)
             //{
             //    objSelect.SelectByIndex(i);
@@ -243,7 +244,7 @@ namespace Selenium_Learning
             {
                 Radioo.Click();
             }
-            Assert.True(Radioo.Selected, "Radio button 'Mozilla' already selected");
+            Assert.True(Radioo.Selected, "Radio button 'Mozilla' not selected");
             Thread.Sleep(3000);
 
             dr.Quit();

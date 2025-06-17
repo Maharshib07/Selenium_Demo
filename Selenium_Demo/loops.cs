@@ -49,60 +49,81 @@ namespace CsharpLoops
                 Console.WriteLine(v);
             }
         }
-        public class MethodRecall()
-        {
-            public void ageofstud(int snum)
-            {
 
-                if (snum == 10)
-                {
-                    Console.WriteLine(" Anand age : 40");
-                }
-                else if (snum == 20)
-                {
-                    Console.WriteLine(" Sai age : 25");
-                }
-                else if (snum == 30)
-                {
-                    Console.WriteLine("Anvesh age : 9");
-                }
-                else
-                {
-                    Console.WriteLine("Asha age : 0");
-                }
+        [Test]
+        public void Whileloopoint()
+        {
+            int[] numbers = { 1, 3, 5, 6, 10 };
+            int i = 0;
+            while ( i <numbers.Length)
+            {
+                Console.Write(numbers[i]+", "); i++;
             }
         }
-        public class MethodRecalls()
+        [Test]
+        public void whileloopstring()
         {
-            [Test]
-            public void ageofperson()
+            string[] str = { "Ram", "Raj", "Rakesh", "Roy" };
+            int i = 0;
+            do
             {
-                MethodRecall tests = new MethodRecall();
-                tests.ageofstud(40);
+                Console.Write(str[i] + " "); i++;
+            }
+            while (i < str.Length);
+
+        }
+    }
+    public class MethodRecall()
+    {
+        public void ageofstud(int snum)
+        {
+
+            if (snum == 10)
+            {
+                Console.WriteLine(" Anand age : 40");
+            }
+            else if (snum == 20)
+            {
+                Console.WriteLine(" Sai age : 25");
+            }
+            else if (snum == 30)
+            {
+                Console.WriteLine("Anvesh age : 9");
+            }
+            else
+            {
+                Console.WriteLine("Asha age : 0");
             }
         }
-        public class Methodrrecall()
+    }
+    public class MethodRecalls()
+    {
+        [Test]
+        public void ageofperson()
         {
-            public int Ray(string Name)
-            {
-                Name = Name.ToLower();
+            MethodRecall tests = new MethodRecall();
+            tests.ageofstud(40);
+        }
+    }
+    public class Methodrrecall()
+    {
+        public int Ray(string Name)
+        {
+            Name = Name.ToLower();
 
-                if (Name == "anand") return 40;
-                else if (Name == "sai") return 25;
-                else if (Name == "anvesh") return 9;
-                else if (Name == "asha") return 0;
-                else return 0;
+            if (Name == "anand") return 40;
+            else if (Name == "sai") return 25;
+            else if (Name == "anvesh") return 9;
+            else if (Name == "asha") return 0;
+            else return 0;
 
-            }
-            [Test]
-            public void Rays()
-            {
-                Methodrrecall roy = new Methodrrecall();
-                int result = roy.Ray("anand");
+        }
+        [Test]
+        public void Rays()
+        {
+            Methodrrecall roy = new Methodrrecall();
+            int result = roy.Ray("anand");
 
-                
-
-            }
         }
     }
     class Primeselect

@@ -84,8 +84,6 @@ namespace CsharpArray
                 //{
                 //    Console.WriteLine("Null");
                 //}
-
-
             }
         }
         [Test]
@@ -105,13 +103,7 @@ namespace CsharpArray
                 //    Console.WriteLine("Null");
                 //}
 
-
             }
-
-
-
         }
-
-
     }
 }

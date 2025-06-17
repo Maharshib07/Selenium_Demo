@@ -2,19 +2,25 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System;
 
 
 namespace Selenium_Demo
 {
     public class ApnaohioPage
     {
+
+        
         [Test]
         public void Apnaohio()
         {
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("incognito");
             IWebDriver dr = new ChromeDriver(options);
-            
+            //string Pagesource = dr.PageSource;
+            //Console.WriteLine("HTML :\n"+Pagesource);
+
+
             string[] cityname = new string[] { "Columbus", "Cincinnati", "Dayton", "Cleveland", "Toledo", "Other" };
             for (int i = 0; i < cityname.Length; i++)
             {

@@ -65,6 +65,7 @@ namespace Selenium_Demo
                 Thread.Sleep(2000);
             }
            dr.Close();
+            //Console.WriteLine("HI");
         }
     }
 }

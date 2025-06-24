@@ -190,11 +190,9 @@ namespace Selenium_Demo
 
             }
             foreach (var item in LetterCount)
-
             {
                 Console.WriteLine($"Letter : {item.Key}, Count : {item.Value}");
             }
-
         }
         [Test]
         public void Letter()

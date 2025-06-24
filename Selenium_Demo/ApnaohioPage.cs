@@ -2,7 +2,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using System;
 
 
 
@@ -11,7 +10,7 @@ namespace Selenium_Demo
     public class ApnaohioPage
     {
 
-        
+
         [Test]
         public void Apnaohio()
         {
@@ -59,12 +58,12 @@ namespace Selenium_Demo
                 Checkbox.Click();
 
                 Thread.Sleep(7000);
-               
+
                 IWebElement btnPost = dr.FindElement(By.XPath("//input[@type='submit']"));
                 btnPost.Click();
                 Thread.Sleep(2000);
             }
-           dr.Close();
+            dr.Close();
             //Console.WriteLine("HI");
         }
     }

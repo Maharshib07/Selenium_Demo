@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OfficeOpenXml;
 using System.Globalization;
+using Microsoft.Office.Interop.Excel;
 //using NUnit.Framework.Interfaces; // EPPlus for Excel handling
 
 namespace Selenium_Demo
@@ -134,7 +135,7 @@ namespace Selenium_Demo
         [Test]
         public void Dictpractice()
         {
-            string name = "Maharshi";
+            string name = "Pawan Kalyan";
             Dictionary<char, int> letterCount = new Dictionary<char, int>();
 
             foreach (var cont in name.ToLower())
@@ -149,12 +150,16 @@ namespace Selenium_Demo
                     {
                         letterCount[cont] = 1;
                     }
+                    
                 }
             }
 
             foreach (var item in letterCount)
             {
-                Console.WriteLine($"Letter: {item.Key}, Count: {item.Value}");
+                if (item.Value > 1)
+                {
+                    Console.WriteLine($"Letter: {item.Key}, Count: {item.Value}");
+                }
             }
         }
         //public void TestDictpractice()
@@ -171,7 +176,7 @@ namespace Selenium_Demo
 
             foreach (var letter in Name.ToLower())
             {
-                if (char.IsLetter(letter))
+                if (char.IsLetterOrDigit(letter))
                 {
                     if (LetterCount.ContainsKey(letter))
                     {
@@ -185,15 +190,17 @@ namespace Selenium_Demo
 
             }
             foreach (var item in LetterCount)
+
             {
                 Console.WriteLine($"Letter : {item.Key}, Count : {item.Value}");
             }
+
         }
         [Test]
         public void Letter()
         {
             LetterCounter nam = new LetterCounter();
-            nam.NameCount("B.M.MahA12rshi");
+            nam.NameCount("B.M.MahA122rshi");
 
         }
     }
@@ -410,7 +417,7 @@ namespace Selenium_Demo
         public void Anagram()
         {
             string name1 = "Maharshi";
-            string name2 = "aaMhihsi";
+            string name2 = "aaMhihsr";
 
             char[] nam1 = name1.ToCharArray();
             char[] nam2 = name2.ToCharArray();
